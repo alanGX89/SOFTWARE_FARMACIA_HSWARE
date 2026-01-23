@@ -1,0 +1,183 @@
+.filters-bar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+.filter-group {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.filter-icon {
+  position: absolute;
+  left: 12px;
+  font-size: 16px;
+  color: var(--gray);
+  pointer-events: none;
+}
+
+.filter-group input[type="date"] {
+  padding: 12px 16px 12px 38px;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 14px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  min-width: 180px;
+}
+
+.filter-group input[type="date"]:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(27, 139, 61, 0.1);
+}
+
+.filters-bar .btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 20px;
+}
+
+.sale-number-cell,
+.date-cell,
+.cashier-cell,
+.payment-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cell-icon {
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.sale-number {
+  font-weight: 600;
+  color: var(--primary);
+  font-family: monospace;
+}
+
+.items-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 28px;
+  padding: 4px 10px;
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.payment-cell svg {
+  font-size: 16px;
+  color: var(--primary);
+}
+
+.sale-total {
+  font-weight: 700;
+  color: #059669;
+  font-size: 16px;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.status-badge.status-success {
+  background: rgba(16, 185, 129, 0.15);
+  color: #059669;
+}
+
+.status-badge.status-danger {
+  background: rgba(239, 68, 68, 0.15);
+  color: #dc2626;
+}
+
+.status-badge.status-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: #d97706;
+}
+
+.status-badge.status-info {
+  background: rgba(59, 130, 246, 0.15);
+  color: #2563eb;
+}
+
+.status-badge svg {
+  font-size: 14px;
+}
+
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 400px;
+  gap: 16px;
+  color: var(--gray);
+}
+
+.spinner-icon {
+  font-size: 40px;
+  animation: spin 1s linear infinite;
+  color: var(--primary);
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--gray);
+}
+
+.empty-icon {
+  font-size: 64px;
+  color: #cbd5e1;
+  margin-bottom: 16px;
+}
+
+.empty-state p {
+  font-size: 16px;
+}
+
+@media (max-width: 768px) {
+  .filters-bar {
+    flex-direction: column;
+  }
+
+  .filter-group {
+    width: 100%;
+  }
+
+  .filter-group input[type="date"] {
+    width: 100%;
+  }
+
+  .filters-bar .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

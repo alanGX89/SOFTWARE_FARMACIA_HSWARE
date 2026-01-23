@@ -1,0 +1,27 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npm install:*)",
+      "Bash(npm cache clean:*)",
+      "Bash(\"/c/Program Files/nodejs/npm\" install --prefix \"d:/DESARROLLO_DE_SOFTWARE/software para farmacia\")",
+      "Bash(powershell.exe -Command \"cd ''D:\\\\DESARROLLO_DE_SOFTWARE\\\\software para farmacia''; node server/index.js\")",
+      "Bash(powershell.exe -Command \"psql -U postgres -c \"\"CREATE DATABASE pharmacare;\"\"\")",
+      "Bash(PGPASSWORD=\"admin1234.\" psql:*)",
+      "Bash(powershell.exe -Command \"& ''C:/Program Files/PostgreSQL/16/bin/psql.exe'' -h localhost -U postgres -c ''CREATE DATABASE pharmacare;''\")",
+      "Bash(powershell.exe -Command \"& ''C:/Program Files/PostgreSQL/15/bin/psql.exe'' -h localhost -U postgres -c ''CREATE DATABASE pharmacare;''\")",
+      "Bash(powershell.exe -Command:*)",
+      "Bash(curl:*)",
+      "Bash(TOKEN=\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzY4ODQwMzk3LCJleHAiOjE3Njk0NDUxOTd9.NACM5D6AyXrIB7a92dmANppLZxXowpvsZHxGmLfe-bU\")",
+      "Bash(__NEW_LINE_3d2575bf047dac5a__ echo \"=== Testing /api/customers ===\")",
+      "Bash(__NEW_LINE_3d2575bf047dac5a__ echo -e \"\\\\n\\\\n=== Testing /api/alerts ===\")",
+      "Bash(__NEW_LINE_3d2575bf047dac5a__ echo -e \"\\\\n\\\\n=== Testing /api/promotions ===\")",
+      "Bash(__NEW_LINE_ed4e2d13d34ed085__ echo \"=== Creating a customer ===\")",
+      "Bash(__NEW_LINE_ed4e2d13d34ed085__ echo -e \"\\\\n\\\\n=== Creating a product ===\")",
+      "Bash(__NEW_LINE_ed4e2d13d34ed085__ echo -e \"\\\\n\\\\n=== Generating alerts ===\")",
+      "Bash(__NEW_LINE_ed324321124f7f75__ echo \"=== Testing barcode search ===\")",
+      "Bash(__NEW_LINE_ed324321124f7f75__ echo -e \"\\\\n\\\\n=== Testing alerts list ===\")",
+      "Bash(__NEW_LINE_ed324321124f7f75__ echo -e \"\\\\n\\\\n=== Testing inventory export endpoint ===\")"
+    ]
+  }
+}

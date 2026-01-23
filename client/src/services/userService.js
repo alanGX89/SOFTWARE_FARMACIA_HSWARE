@@ -1,0 +1,10 @@
+import api from './api';
+
+export const userService = {
+  getAll: (params) => api.get('/api/users', { params }),
+  getById: (id) => api.get(`/api/users/${id}`),
+  create: (data) => api.post('/api/users', data),
+  update: (id, data) => api.put(`/api/users/${id}`, data),
+  delete: (id) => api.delete(`/api/users/${id}`),
+  reactivate: (id) => api.put(`/api/users/${id}/reactivate`)
+};
