@@ -209,7 +209,42 @@
   font-weight: 600;
 }
 
+/* Tabla responsiva */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-header-content h1 {
+    font-size: 24px;
+  }
+
+  .page-header .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .table-container {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .data-table {
+    min-width: 650px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
   }
@@ -218,5 +253,72 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+  }
+
+  .supplier-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .contact-cell,
+  .phone-cell,
+  .city-cell {
+    font-size: 13px;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .action-buttons {
+    gap: 6px;
+  }
+
+  .btn-action {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+
+  .modal-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .section-title h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header-content h1 {
+    font-size: 20px;
+  }
+
+  .empty-state {
+    padding: 40px 16px;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group textarea {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }

@@ -247,6 +247,12 @@
   font-size: 16px;
 }
 
+/* Tabla responsiva */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 @media (max-width: 1024px) {
   .reports-grid {
     grid-template-columns: 1fr;
@@ -258,11 +264,172 @@
 }
 
 @media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-header-content h1 {
+    font-size: 24px;
+  }
+
+  .btn-refresh {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .reports-grid {
+    gap: 16px;
+  }
+
+  .report-card {
+    padding: 18px;
+  }
+
+  .card-header {
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+  }
+
+  .card-icon {
+    font-size: 20px;
+  }
+
+  .card-header h2 {
+    font-size: 16px;
+  }
+
   .report-summary {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .summary-item {
+    padding: 16px 12px;
+  }
+
+  .summary-icon-container {
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .summary-label {
+    font-size: 11px;
   }
 
   .summary-value {
-    font-size: 24px;
+    font-size: 22px;
+  }
+
+  .table-container {
+    margin: 0 -12px;
+    padding: 0 12px;
+  }
+
+  .data-table {
+    min-width: 500px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .rank-badge {
+    min-width: 30px;
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .quantity-badge,
+  .category-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .revenue {
+    font-size: 14px;
+  }
+
+  .loading {
+    height: 300px;
+  }
+
+  .spinner-icon {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header-content h1 {
+    font-size: 20px;
+  }
+
+  .report-card {
+    padding: 14px;
+  }
+
+  .card-header {
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .card-icon {
+    font-size: 18px;
+  }
+
+  .card-header h2 {
+    font-size: 15px;
+  }
+
+  .report-summary {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    text-align: left;
+    padding: 14px;
+  }
+
+  .summary-icon-container {
+    margin: 0;
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+
+  .summary-content {
+    flex: 1;
+  }
+
+  .summary-value {
+    font-size: 20px;
+  }
+
+  .empty-state {
+    padding: 40px 16px;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .product-info {
+    gap: 8px;
+  }
+
+  .product-icon {
+    font-size: 16px;
   }
 }

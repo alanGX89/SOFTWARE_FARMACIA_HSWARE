@@ -20,6 +20,12 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  // Función para autocompletar y facilitar pruebas
+  const handleQuickLogin = (userEmail, userPassword) => {
+    setEmail(userEmail);
+    setPassword(userPassword);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -111,25 +117,41 @@ const Login = () => {
         <div className="login-footer">
           <h3>
             <FiUser className="footer-icon" />
-            Usuarios de prueba:
+            Usuarios de prueba (clic para rellenar):
           </h3>
-          <ul>
-            <li>
+          <div className="quick-access-list">
+            {/* Botón Admin */}
+            <button 
+              type="button"
+              className="quick-login-btn"
+              onClick={() => handleQuickLogin('admin@farmacia.com', 'Admin123!')}
+            >
               <span className="role-badge admin">Admin</span>
-              <span>admin@farmacia.com / Admin123!</span>
-            </li>
-            <li>
+              <span className="user-info">admin@farmacia.com</span>
+            </button>
+
+            {/* Botón Farmacéutico */}
+            <button 
+              type="button"
+              className="quick-login-btn"
+              onClick={() => handleQuickLogin('farmaceutico@farmacia.com', 'Farm123!')}
+            >
               <span className="role-badge pharmacist">
-                <RiStethoscopeLine />
-                Farm.
+                <RiStethoscopeLine /> Farm.
               </span>
-              <span>farmaceutico@farmacia.com / Farm123!</span>
-            </li>
-            <li>
+              <span className="user-info">farmaceutico@farmacia.com</span>
+            </button>
+
+            {/* Botón Cajero */}
+            <button 
+              type="button"
+              className="quick-login-btn"
+              onClick={() => handleQuickLogin('cajero@farmacia.com', 'Cajero123!')}
+            >
               <span className="role-badge cashier">Cajero</span>
-              <span>cajero@farmacia.com / Cajero123!</span>
-            </li>
-          </ul>
+              <span className="user-info">cajero@farmacia.com</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>

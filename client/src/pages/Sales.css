@@ -163,9 +163,37 @@
   font-size: 16px;
 }
 
+/* Tabla responsiva */
+.table-container {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 1024px) {
+  .filter-group input[type="date"] {
+    min-width: 150px;
+  }
+}
+
 @media (max-width: 768px) {
+  .page-header {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .page-header-content h1 {
+    font-size: 24px;
+  }
+
+  .page-header .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
   .filters-bar {
     flex-direction: column;
+    padding: 14px;
+    gap: 10px;
   }
 
   .filter-group {
@@ -179,5 +207,79 @@
   .filters-bar .btn {
     width: 100%;
     justify-content: center;
+  }
+
+  /* Tabla responsiva */
+  .table-container {
+    margin: 0 -16px;
+    padding: 0 16px;
+  }
+
+  .data-table {
+    min-width: 650px;
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 12px 10px;
+    font-size: 13px;
+  }
+
+  .sale-total {
+    font-size: 14px;
+  }
+
+  .status-badge {
+    font-size: 11px;
+    padding: 4px 10px;
+  }
+
+  .items-badge {
+    font-size: 12px;
+    padding: 3px 8px;
+    min-width: 24px;
+  }
+
+  .loading {
+    height: 300px;
+  }
+
+  .spinner-icon {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header-content h1 {
+    font-size: 20px;
+  }
+
+  .filters-bar {
+    padding: 12px;
+  }
+
+  .filter-group input[type="date"] {
+    padding: 10px 10px 10px 36px;
+    font-size: 13px;
+  }
+
+  .empty-state {
+    padding: 40px 16px;
+  }
+
+  .empty-icon {
+    font-size: 48px;
+  }
+
+  .empty-state p {
+    font-size: 14px;
+  }
+
+  .sale-number {
+    font-size: 13px;
+  }
+
+  .cell-icon {
+    font-size: 12px;
   }
 }

@@ -525,9 +525,105 @@
   }
 }
 
+@media (max-width: 768px) {
+  .page-header-content h1 {
+    font-size: 24px;
+  }
+
+  .page-title-icon {
+    font-size: 28px;
+  }
+
+  .sale-left,
+  .sale-right {
+    gap: 20px;
+  }
+
+  .card {
+    padding: 18px;
+  }
+
+  .card h2 {
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+
+  .section-icon {
+    font-size: 18px;
+  }
+
+  .search-product input {
+    padding: 12px 14px 12px 44px;
+    font-size: 14px;
+  }
+
+  .search-input-icon {
+    font-size: 18px;
+    left: 14px;
+  }
+
+  .product-suggestion {
+    padding: 12px 14px;
+    gap: 12px;
+  }
+
+  .suggestion-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .product-suggestion-name {
+    font-size: 14px;
+  }
+
+  .product-suggestion-meta {
+    font-size: 12px;
+  }
+
+  .summary-line.total {
+    font-size: 18px;
+  }
+
+  .change-amount {
+    font-size: 18px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}
+
 @media (max-width: 640px) {
+  .page-header-content h1 {
+    font-size: 20px;
+  }
+
+  .page-title-icon {
+    font-size: 24px;
+  }
+
   .cart-item {
     flex-wrap: wrap;
+    padding: 12px;
+  }
+
+  .cart-item-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+
+  .cart-item-name {
+    font-size: 14px;
+  }
+
+  .cart-item-price {
+    font-size: 12px;
   }
 
   .cart-item-controls {
@@ -541,5 +637,88 @@
 
   .cart-item-subtotal {
     margin-left: auto;
+    font-size: 14px;
+    min-width: 70px;
+  }
+
+  .btn-qty {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .qty-input {
+    width: 45px;
+    font-size: 14px;
+    padding: 4px;
+  }
+
+  .btn-remove {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+  }
+
+  .empty-cart {
+    padding: 32px 16px;
+  }
+
+  .empty-cart-icon {
+    font-size: 44px;
+  }
+
+  .empty-cart p {
+    font-size: 14px;
+  }
+
+  .empty-cart span {
+    font-size: 13px;
+  }
+
+  .summary-lines {
+    padding: 14px;
+  }
+
+  .summary-line {
+    font-size: 13px;
+    padding: 8px 0;
+  }
+
+  .summary-line.total {
+    font-size: 16px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .form-group input,
+  .form-group select {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .change-display {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+
+  .change-amount {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .discount-input-wrapper {
+    padding: 3px 6px;
+  }
+
+  .discount-input {
+    width: 60px;
+    font-size: 13px;
+  }
+
+  .product-suggestions {
+    max-height: 260px;
   }
 }

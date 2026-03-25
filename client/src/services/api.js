@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+// Detectar automáticamente la URL del servidor basándose en el host actual
+const getApiUrl = () => {
+  const hostname = window.location.hostname;
+  return `http://${hostname}:5000`;
+};
+
 const api = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || 'http://localhost:5000',
+  baseURL: getApiUrl(),
   headers: {
     'Content-Type': 'application/json'
   }
