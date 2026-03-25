@@ -8,8 +8,6 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD:-changeme}
     volumes:
       - pgdata:/var/lib/postgresql/data
-    ports:
-      - "127.0.0.1:5432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-farmacia_user} -d ${DB_NAME:-farmacia_db}"]
       interval: 5s
@@ -34,16 +32,6 @@ services:
       JWT_EXPIRE: ${JWT_EXPIRE:-7d}
     ports:
       - "127.0.0.1:5000:5000"
-
-  nginx:
-    image: nginx:alpine
-    restart: always
-    depends_on:
-      - app
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
 
 volumes:
   pgdata:
