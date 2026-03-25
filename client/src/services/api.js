@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-// Detectar automáticamente la URL del servidor basándose en el host actual
+// En producción (puerto 80/443 via Nginx), usar rutas relativas
+// En desarrollo, apuntar al backend en puerto 5000
 const getApiUrl = () => {
-  const hostname = window.location.hostname;
-  return `http://${hostname}:5000`;
+  const { hostname, port, protocol } = window.location;
+  const isDev = port === '4123' || port === '3000';
+  return isDev ? `http://${hostname}:5000` : '';
 };
 
 const api = axios.create({

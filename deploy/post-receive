@@ -1,0 +1,28 @@
+#!/bin/bash
+# Hook post-receive para auto-deploy con Docker
+# Copiar a: /var/repo/farmacia.git/hooks/post-receive
+
+TARGET="/var/www/farmacia"
+GIT_DIR="/var/repo/farmacia.git"
+BRANCH="main"
+
+while read oldrev newrev ref
+do
+    if [[ $ref = refs/heads/$BRANCH ]]; then
+        echo ">>> Desplegando rama $BRANCH a $TARGET..."
+
+        git --work-tree=$TARGET --git-dir=$GIT_DIR checkout -f $BRANCH
+
+        cd $TARGET
+
+        echo ">>> Reconstruyendo contenedores..."
+        docker compose build --no-cache app
+        docker compose up -d
+
+        echo ">>> Limpiando imagenes antiguas..."
+        docker image prune -f
+
+        echo ">>> Deploy completado!"
+        docker compose ps
+    fi
+done
