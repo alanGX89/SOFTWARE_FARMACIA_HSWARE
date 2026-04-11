@@ -111,8 +111,12 @@ async function startServer() {
     await sequelize.authenticate();
     console.log('✓ Conectado a PostgreSQL');
 
-    // Sincronizar tablas (alter: true para actualizar sin perder datos)
-    await sequelize.sync({ alter: true });
+    // En desarrollo: alter:true aplica cambios de modelos automáticamente
+    // En producción: force:false solo crea tablas nuevas, sin ALTER TABLE
+    const syncOptions = process.env.NODE_ENV === 'production'
+      ? { force: false }
+      : { alter: true };
+    await sequelize.sync(syncOptions);
     console.log('✓ Tablas sincronizadas');
 
     // Crear datos iniciales
