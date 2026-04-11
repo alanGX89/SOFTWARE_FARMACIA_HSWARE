@@ -10,6 +10,7 @@ import NewSale from './pages/NewSale';
 import Users from './pages/Users';
 import Suppliers from './pages/Suppliers';
 import Reports from './pages/Reports';
+import ManualPage from './pages/ManualPage';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/manual" element={<PrivateRoute><ManualPage /></PrivateRoute>} />
 
           <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
           <Route path="/products" element={<PrivateRoute><Products /></PrivateRoute>} />

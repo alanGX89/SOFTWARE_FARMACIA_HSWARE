@@ -81,6 +81,14 @@ async function initializeDefaultData() {
           password: 'Cajero123!',
           role: 'cashier',
           phone: '1234567892'
+        },
+        {
+          // Usuario COMERCIAL — solo accede al Manual de Usuario (demo para clientes)
+          name: 'Demo Comercial',
+          email: 'comercial@pharmacare.com',
+          password: 'comercial123',
+          role: 'comercial',
+          phone: '0000000000'
         }
       ];
 

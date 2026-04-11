@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Developer Manual — PharmaCare Pro</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',sans-serif;background:#f8fafc;color:#1e293b;display:flex;min-height:100vh}
+  nav{width:240px;background:#052e16;color:#cbd5e1;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;padding:20px 0;flex-shrink:0}
+  nav .logo{padding:0 20px 20px;border-bottom:1px solid #14532d;margin-bottom:12px}
+  nav .logo h2{color:#4ade80;font-size:15px;font-weight:700}
+  nav .logo p{color:#4b5563;font-size:12px;margin-top:2px}
+  nav a{display:block;padding:8px 20px;font-size:13px;color:#86efac;text-decoration:none;border-left:3px solid transparent;transition:all .15s}
+  nav a:hover,nav a.active{color:#f0fdf4;background:#14532d;border-left-color:#4ade80}
+  nav .nav-section{font-size:10px;font-weight:700;color:#374151;text-transform:uppercase;letter-spacing:1px;padding:16px 20px 6px}
+  main{margin-left:240px;flex:1;padding:40px 48px;max-width:1000px}
+  h1{font-size:26px;font-weight:700;color:#0f172a;margin-bottom:6px}
+  h2{font-size:17px;font-weight:600;color:#0f172a;margin:32px 0 12px;padding-bottom:8px;border-bottom:2px solid #e2e8f0}
+  p{color:#475569;font-size:14px;line-height:1.7;margin-bottom:10px}
+  code{background:#052e16;color:#4ade80;padding:2px 7px;border-radius:4px;font-family:monospace;font-size:13px}
+  pre{background:#0f172a;color:#e2e8f0;padding:16px 20px;border-radius:8px;overflow-x:auto;font-size:13px;line-height:1.6;margin:12px 0}
+  pre .c{color:#64748b} pre .k{color:#f472b6} pre .s{color:#4ade80} pre .v{color:#fbbf24}
+  .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11px;font-weight:600;margin:2px}
+  .badge.green{background:#dcfce7;color:#166534}
+  .badge.blue{background:#dbeafe;color:#1e40af}
+  .badge.orange{background:#fff7ed;color:#9a3412}
+  .badge.purple{background:#f3e8ff;color:#6b21a8}
+  .note{border-left:4px solid #4ade80;background:#f0fdf4;padding:12px 16px;border-radius:0 8px 8px 0;font-size:13px;color:#14532d;margin:12px 0}
+  .warn{border-left:4px solid #fbbf24;background:#fffbeb;padding:12px 16px;border-radius:0 8px 8px 0;font-size:13px;color:#78350f;margin:12px 0}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+  th{background:#f1f5f9;padding:8px 12px;text-align:left;font-weight:600;border-bottom:2px solid #e2e8f0}
+  td{padding:8px 12px;border-bottom:1px solid #e2e8f0;color:#475569}
+  tr:nth-child(even) td{background:#f8fafc}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0}
+  .card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:14px;font-size:13px}
+  .card h4{font-weight:600;color:#0f172a;margin-bottom:6px}
+  .card p{color:#64748b;margin:0;font-size:12px}
+  section{display:none}
+  section.active{display:block}
+  .subtitle{color:#64748b;font-size:14px;margin-bottom:24px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="logo">
+    <h2>💊 PharmaCare Pro</h2>
+    <p>Developer Manual v1.0</p>
+  </div>
+  <div class="nav-section">Inicio</div>
+  <a href="#" class="active" onclick="show('overview',this)">Resumen del Proyecto</a>
+  <a href="#" onclick="show('stack',this)">Stack Tecnológico</a>
+  <div class="nav-section">Arquitectura</div>
+  <a href="#" onclick="show('estructura',this)">Estructura de Carpetas</a>
+  <a href="#" onclick="show('db',this)">Base de Datos</a>
+  <a href="#" onclick="show('api',this)">API Endpoints</a>
+  <div class="nav-section">Desarrollo</div>
+  <a href="#" onclick="show('setup',this)">Setup Local</a>
+  <a href="#" onclick="show('docker',this)">Docker</a>
+  <a href="#" onclick="show('env',this)">Variables de Entorno</a>
+  <div class="nav-section">Despliegue</div>
+  <a href="#" onclick="show('deploy',this)">Producción</a>
+  <a href="#" onclick="show('roles',this)">Roles y Auth</a>
+</nav>
+<main>
+
+<section id="overview" class="active">
+  <h1>PharmaCare Pro</h1>
+  <p class="subtitle">Sistema de gestión para farmacias — Node.js monolítico + React + PostgreSQL</p>
+  <p>Sistema completo para farmacias: inventario de medicamentos, ventas, control de vencimientos, proveedores, devoluciones, promociones, alertas de stock, y reportes. Arquitectura monolítica con el servidor Node.js sirviendo tanto la API como el build de React.</p>
+  <div class="grid">
+    <div class="card"><h4>Servidor</h4><p>Express + Sequelize ORM + PostgreSQL 16</p></div>
+    <div class="card"><h4>Frontend</h4><p>React 18 + JSX (servido por Express)</p></div>
+    <div class="card"><h4>Auth</h4><p>JWT (expire 7d), Sequelize models</p></div>
+    <div class="card"><h4>Deploy</h4><p>Docker Compose (app + db) + Nginx</p></div>
+  </div>
+  <h2>Arquitectura monolítica</h2>
+  <div class="note">A diferencia de otros proyectos, PharmaCare usa una sola imagen Docker. El servidor Express sirve la API en <code>/api</code> y también sirve el build de React desde <code>client/build/</code>.</div>
+</section>
+
+<section id="stack">
+  <h1>Stack Tecnológico</h1>
+  <h2>Backend (server/)</h2>
+  <table>
+    <tr><th>Librería</th><th>Uso</th></tr>
+    <tr><td><code>express</code></td><td>Framework HTTP</td></tr>
+    <tr><td><code>sequelize</code></td><td>ORM con migraciones</td></tr>
+    <tr><td><code>pg + pg-hstore</code></td><td>Driver PostgreSQL</td></tr>
+    <tr><td><code>jsonwebtoken</code></td><td>JWT auth</td></tr>
+    <tr><td><code>bcryptjs</code></td><td>Hash de contraseñas</td></tr>
+    <tr><td><code>cors</code></td><td>CORS policy</td></tr>
+    <tr><td><code>dotenv</code></td><td>Variables de entorno</td></tr>
+  </table>
+  <h2>Frontend (client/)</h2>
+  <table>
+    <tr><th>Librería</th><th>Uso</th></tr>
+    <tr><td><code>react 18</code></td><td>UI framework</td></tr>
+    <tr><td><code>react-router-dom v6</code></td><td>Enrutamiento SPA</td></tr>
+    <tr><td><code>axios</code></td><td>HTTP client</td></tr>
+    <tr><td><code>recharts</code></td><td>Gráficas de ventas y stock</td></tr>
+  </table>
+</section>
+
+<section id="estructura">
+  <h1>Estructura de Carpetas</h1>
+  <pre>
+software para farmacia/
+├── package.json            <span class="c"># Scripts del monorepo</span>
+├── docker-compose.yml      <span class="c"># app (monolito) + db</span>
+├── Dockerfile              <span class="c"># Build: instala todo, npm run build, arranca server</span>
+├── server/
+│   ├── index.js            <span class="c"># Entry point: Express API + serve React build</span>
+│   ├── config/
+│   │   ├── database.js     <span class="c"># Sequelize connection</span>
+│   │   └── sync.js         <span class="c"># Sync models (dev)</span>
+│   ├── models/
+│   │   ├── User.js         <span class="c"># Roles: admin, pharmacist, cashier, comercial</span>
+│   │   ├── Product.js      <span class="c"># Medicamentos con vencimiento</span>
+│   │   ├── Sale.js + SaleItem.js
+│   │   ├── Customer.js
+│   │   ├── Supplier.js
+│   │   ├── Return.js + ReturnItem.js
+│   │   ├── Promotion.js
+│   │   ├── StockMovement.js
+│   │   └── Alert.js
+│   ├── controllers/
+│   ├── routes/
+│   └── middleware/
+├── client/
+│   ├── src/
+│   │   ├── App.js          <span class="c"># Router + PrivateRoute con redirect COMERCIAL</span>
+│   │   ├── pages/
+│   │   │   └── ManualPage.js
+│   │   └── components/
+│   │       └── PrivateRoute.js
+│   └── public/
+└── database/               <span class="c"># Scripts SQL de respaldo</span>
+  </pre>
+</section>
+
+<section id="db">
+  <h1>Base de Datos</h1>
+  <p>PostgreSQL 16 gestionado con <strong>Sequelize ORM</strong>. Los modelos se sincronizan con <code>sequelize.sync()</code>.</p>
+  <h2>Modelos Sequelize</h2>
+  <table>
+    <tr><th>Modelo</th><th>Descripción</th></tr>
+    <tr><td><code>User</code></td><td>Usuarios con role: admin | pharmacist | cashier | comercial</td></tr>
+    <tr><td><code>Product</code></td><td>Medicamentos: nombre, código, stock, precio, vencimiento, proveedor</td></tr>
+    <tr><td><code>Sale</code></td><td>Ventas con total y estado</td></tr>
+    <tr><td><code>SaleItem</code></td><td>Líneas de venta</td></tr>
+    <tr><td><code>Customer</code></td><td>Clientes registrados</td></tr>
+    <tr><td><code>Supplier</code></td><td>Proveedores</td></tr>
+    <tr><td><code>Return</code></td><td>Devoluciones</td></tr>
+    <tr><td><code>Promotion</code></td><td>Promociones y descuentos</td></tr>
+    <tr><td><code>StockMovement</code></td><td>Historial de movimientos de inventario</td></tr>
+    <tr><td><code>Alert</code></td><td>Alertas de vencimiento y stock mínimo</td></tr>
+  </table>
+  <h2>Sincronizar base de datos</h2>
+  <pre><span class="c"># Crear tablas desde los modelos (dev)</span>
+node server/config/sync.js
+
+<span class="c"># O con el script del package.json</span>
+npm run db:sync</pre>
+</section>
+
+<section id="api">
+  <h1>API Endpoints</h1>
+  <p>Base URL local: <code>http://localhost:5000/api</code></p>
+  <h2>Autenticación</h2>
+  <table>
+    <tr><th>Método</th><th>Ruta</th><th>Descripción</th></tr>
+    <tr><td><span class="badge blue">POST</span></td><td><code>/auth/login</code></td><td>Login → JWT token</td></tr>
+    <tr><td><span class="badge green">GET</span></td><td><code>/auth/me</code></td><td>Perfil autenticado</td></tr>
+  </table>
+  <h2>Módulos</h2>
+  <table>
+    <tr><th>Prefijo</th><th>Módulo</th></tr>
+    <tr><td><code>/products</code></td><td>Inventario de medicamentos</td></tr>
+    <tr><td><code>/sales</code></td><td>Ventas + líneas de detalle</td></tr>
+    <tr><td><code>/customers</code></td><td>Clientes</td></tr>
+    <tr><td><code>/suppliers</code></td><td>Proveedores</td></tr>
+    <tr><td><code>/returns</code></td><td>Devoluciones</td></tr>
+    <tr><td><code>/promotions</code></td><td>Promociones y descuentos</td></tr>
+    <tr><td><code>/alerts</code></td><td>Alertas de vencimiento/stock</td></tr>
+    <tr><td><code>/reports</code></td><td>Reportes y estadísticas</td></tr>
+    <tr><td><code>/users</code></td><td>Gestión de usuarios (admin)</td></tr>
+  </table>
+</section>
+
+<section id="setup">
+  <h1>Setup Local</h1>
+  <pre><span class="c"># Instalar todo (raíz + client)</span>
+npm run install-all
+
+<span class="c"># Configurar variables de entorno en raíz (.env)</span>
+DB_HOST=<span class="s">localhost</span>
+DB_PORT=<span class="v">5432</span>
+DB_NAME=<span class="s">farmacia_db</span>
+DB_USER=<span class="s">farmacia_user</span>
+DB_PASSWORD=<span class="s">changeme</span>
+JWT_SECRET=<span class="s">tu_secreto</span>
+JWT_EXPIRE=<span class="s">7d</span>
+PORT=<span class="v">5000</span>
+NODE_ENV=<span class="s">development</span>
+
+<span class="c"># Crear la BD en PostgreSQL</span>
+createdb farmacia_db
+
+<span class="c"># Sincronizar modelos (crea las tablas)</span>
+npm run db:sync
+
+<span class="c"># Iniciar en modo desarrollo (backend + frontend concurrente)</span>
+npm run dev</pre>
+  <p>El comando <code>npm run dev</code> usa <strong>concurrently</strong> para lanzar el servidor Express (puerto 5000) y el servidor de desarrollo de React (puerto 3000) al mismo tiempo.</p>
+</section>
+
+<section id="docker">
+  <h1>Docker Compose</h1>
+  <h2>Servicios</h2>
+  <table>
+    <tr><th>Servicio</th><th>Puerto</th><th>Descripción</th></tr>
+    <tr><td><code>db</code></td><td>5432 (interno)</td><td>PostgreSQL 16</td></tr>
+    <tr><td><code>app</code></td><td>5000</td><td>Express (API + React build)</td></tr>
+  </table>
+  <pre><span class="c"># Construir e iniciar</span>
+docker-compose up -d --build
+
+<span class="c"># Ver logs</span>
+docker-compose logs -f app
+
+<span class="c"># El Dockerfile hace:</span>
+<span class="c"># 1. npm install (raíz)</span>
+<span class="c"># 2. cd client && npm install && npm run build</span>
+<span class="c"># 3. node server/index.js → sirve API + /client/build</span></pre>
+  <div class="note">El servidor Express detecta <code>NODE_ENV=production</code> y sirve el build estático de React en todas las rutas no-API.</div>
+</section>
+
+<section id="env">
+  <h1>Variables de Entorno</h1>
+  <table>
+    <tr><th>Variable</th><th>Defecto</th><th>Descripción</th></tr>
+    <tr><td><code>DB_HOST</code></td><td>db</td><td>Host de PostgreSQL</td></tr>
+    <tr><td><code>DB_PORT</code></td><td>5432</td><td>Puerto PostgreSQL</td></tr>
+    <tr><td><code>DB_NAME</code></td><td>farmacia_db</td><td>Nombre de la base de datos</td></tr>
+    <tr><td><code>DB_USER</code></td><td>farmacia_user</td><td>Usuario de la BD</td></tr>
+    <tr><td><code>DB_PASSWORD</code></td><td>changeme</td><td>Contraseña de la BD</td></tr>
+    <tr><td><code>JWT_SECRET</code></td><td>—</td><td>Clave secreta JWT</td></tr>
+    <tr><td><code>JWT_EXPIRE</code></td><td>7d</td><td>Expiración del token</td></tr>
+    <tr><td><code>PORT</code></td><td>5000</td><td>Puerto del servidor</td></tr>
+    <tr><td><code>NODE_ENV</code></td><td>production</td><td>Activa servir React build</td></tr>
+  </table>
+</section>
+
+<section id="deploy">
+  <h1>Producción</h1>
+  <pre><span class="c"># En el servidor (Ubuntu)</span>
+git clone &lt;repo&gt; && cd "software para farmacia"
+cp .env.example .env && nano .env
+
+<span class="c"># Construir (incluye npm run build del frontend)</span>
+docker-compose up -d --build
+
+<span class="c"># Nginx como reverse proxy (puerto 80 → 5000)</span>
+cat conf_ngnix.md</pre>
+  <p>Ver <code>conf_ngnix.md</code> y <code>CONFIGURACION_PUERTOS.md</code> para la configuración de Nginx y puertos.</p>
+</section>
+
+<section id="roles">
+  <h1>Roles y Autenticación</h1>
+  <h2>Roles disponibles (User.js)</h2>
+  <table>
+    <tr><th>Rol</th><th>Acceso</th></tr>
+    <tr><td><span class="badge purple">admin</span></td><td>Acceso total + gestión de usuarios</td></tr>
+    <tr><td><span class="badge blue">pharmacist</span></td><td>Inventario, ventas, compras</td></tr>
+    <tr><td><span class="badge green">cashier</span></td><td>Solo ventas y caja</td></tr>
+    <tr><td><span class="badge orange">comercial</span></td><td>Solo <code>/manual</code> — Demo</td></tr>
+  </table>
+  <h2>Credenciales de demo</h2>
+  <pre>Admin:      admin@pharmacare.com      / Admin123!
+Comercial:  comercial@pharmacare.com  / comercial123</pre>
+  <h2>Inicialización automática</h2>
+  <p>Al arrancar el servidor (<code>server/index.js</code>), se crea automáticamente el usuario admin y comercial si no existen, usando <code>findOrCreate</code>.</p>
+  <h2>PrivateRoute.js</h2>
+  <pre><span class="k">if</span> (user.role === <span class="s">'comercial'</span>) <span class="k">return</span> &lt;Navigate to=<span class="s">"/manual"</span> /&gt;;</pre>
+</section>
+
+</main>
+<script>
+function show(id, el) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  el.classList.add('active');
+  return false;
+}
+</script>
+</body>
+</html>
