@@ -55,44 +55,40 @@ app.use((err, req, res, next) => {
 // Initialize default data
 async function initializeDefaultData() {
   try {
-    const userCount = await User.count();
+    const defaultUsers = [
+      {
+        name: 'Administrador',
+        email: 'admin@farmacia.com',
+        password: 'Admin123!',
+        role: 'admin',
+        phone: '1234567890'
+      },
+      {
+        name: 'Farmacéutico Principal',
+        email: 'farmaceutico@farmacia.com',
+        password: 'Farm123!',
+        role: 'pharmacist',
+        phone: '1234567891'
+      },
+      {
+        name: 'Cajero Principal',
+        email: 'cajero@farmacia.com',
+        password: 'Cajero123!',
+        role: 'cashier',
+        phone: '1234567892'
+      },
+      {
+        name: 'Demo Comercial',
+        email: 'comercial@pharmacare.com',
+        password: 'comercial123',
+        role: 'comercial',
+        phone: '0000000000'
+      }
+    ];
 
-    if (userCount === 0) {
-      console.log('Creando usuarios por defecto...');
-
-      const defaultUsers = [
-        {
-          name: 'Administrador',
-          email: 'admin@farmacia.com',
-          password: 'Admin123!',
-          role: 'admin',
-          phone: '1234567890'
-        },
-        {
-          name: 'Farmacéutico Principal',
-          email: 'farmaceutico@farmacia.com',
-          password: 'Farm123!',
-          role: 'pharmacist',
-          phone: '1234567891'
-        },
-        {
-          name: 'Cajero Principal',
-          email: 'cajero@farmacia.com',
-          password: 'Cajero123!',
-          role: 'cashier',
-          phone: '1234567892'
-        },
-        {
-          // Usuario COMERCIAL — solo accede al Manual de Usuario (demo para clientes)
-          name: 'Demo Comercial',
-          email: 'comercial@pharmacare.com',
-          password: 'comercial123',
-          role: 'comercial',
-          phone: '0000000000'
-        }
-      ];
-
-      for (const userData of defaultUsers) {
+    for (const userData of defaultUsers) {
+      const exists = await User.findOne({ where: { email: userData.email } });
+      if (!exists) {
         await User.create(userData);
         console.log(`✓ Usuario creado: ${userData.email}`);
       }
