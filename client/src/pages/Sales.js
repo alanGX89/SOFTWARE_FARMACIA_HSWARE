@@ -193,7 +193,7 @@ const Sales = () => {
                     </div>
                   </td>
                   <td>
-                    <span className="sale-total">${sale.total.toFixed(2)}</span>
+                    <span className="sale-total">${parseFloat(sale.total || 0).toFixed(2)}</span>
                   </td>
                   <td>
                     <span className={`status-badge ${getStatusBadgeClass(sale.status)}`}>

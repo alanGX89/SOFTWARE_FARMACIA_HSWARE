@@ -100,7 +100,7 @@ const Reports = () => {
               </div>
               <div className="summary-label">Valor Total Costo</div>
               <div className="summary-value">
-                ${inventoryReport?.summary.totalCostValue?.toFixed(2)}
+                ${parseFloat(inventoryReport?.summary.totalCostValue || 0).toFixed(2)}
               </div>
             </div>
             <div className="summary-item">
@@ -109,7 +109,7 @@ const Reports = () => {
               </div>
               <div className="summary-label">Valor Total Venta</div>
               <div className="summary-value success">
-                ${inventoryReport?.summary.totalRetailValue?.toFixed(2)}
+                ${parseFloat(inventoryReport?.summary.totalRetailValue || 0).toFixed(2)}
               </div>
             </div>
             <div className="summary-item">
@@ -118,7 +118,7 @@ const Reports = () => {
               </div>
               <div className="summary-label">Ganancia Potencial</div>
               <div className="summary-value primary">
-                ${inventoryReport?.summary.potentialProfit?.toFixed(2)}
+                ${parseFloat(inventoryReport?.summary.potentialProfit || 0).toFixed(2)}
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@ const Reports = () => {
                   <td>
                     <span className="stock-value">{cat.totalStock}</span>
                   </td>
-                  <td className="value-cell">${cat.totalValue.toFixed(2)}</td>
+                  <td className="value-cell">${parseFloat(cat.totalValue || 0).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -188,7 +188,7 @@ const Reports = () => {
                   <td>
                     <span className="quantity-badge">{product.totalQuantity}</span>
                   </td>
-                  <td className="revenue">${product.totalRevenue.toFixed(2)}</td>
+                  <td className="revenue">${parseFloat(product.totalRevenue || 0).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>

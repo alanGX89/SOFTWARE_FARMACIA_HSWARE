@@ -68,7 +68,7 @@ const Dashboard = () => {
           <div className="stat-content">
             <div className="stat-label">Ventas Hoy</div>
             <div className="stat-value">
-              ${dashboard?.today?.total?.toFixed(2) || '0.00'}
+              ${parseFloat(dashboard?.today?.total || 0).toFixed(2)}
             </div>
             <div className="stat-meta">
               {dashboard?.today?.sales || 0} transacciones
@@ -83,7 +83,7 @@ const Dashboard = () => {
           <div className="stat-content">
             <div className="stat-label">Ventas del Mes</div>
             <div className="stat-value">
-              ${dashboard?.month?.total?.toFixed(2) || '0.00'}
+              ${parseFloat(dashboard?.month?.total || 0).toFixed(2)}
             </div>
             <div className="stat-meta">
               {dashboard?.month?.sales || 0} transacciones
