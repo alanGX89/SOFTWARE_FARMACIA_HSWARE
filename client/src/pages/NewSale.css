@@ -722,3 +722,87 @@
     max-height: 260px;
   }
 }
+
+/* ---------- SALE SUCCESS MODAL ---------- */
+.sale-success-modal {
+  max-width: 420px;
+  text-align: center;
+  padding: 36px 32px;
+}
+
+.sale-success-icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+}
+
+.sale-success-modal h2 {
+  font-size: 19px;
+  font-weight: 800;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+
+.sale-success-number {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gray);
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+}
+
+.sale-success-details {
+  background: var(--light);
+  border-radius: 12px;
+  padding: 14px 18px;
+  margin: 8px 0 24px;
+  text-align: left;
+}
+
+.sale-success-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  font-size: 14px;
+  color: var(--gray);
+}
+
+.sale-success-row:not(:last-child) {
+  border-bottom: 1px solid var(--border);
+}
+
+.sale-success-row b {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+.sale-success-row.total {
+  padding-top: 12px;
+}
+
+.sale-success-row.total b {
+  color: var(--primary);
+  font-size: 17px;
+}
+
+.sale-success-row.change b {
+  color: var(--success);
+}
+
+.sale-success-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.sale-success-actions .btn {
+  flex: 1;
+  justify-content: center;
+}

@@ -32,6 +32,8 @@ const NewSale = () => {
   const [customer, setCustomer] = useState({ name: '', phone: '', email: '' });
   const [discount, setDiscount] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [saleSummary, setSaleSummary] = useState(null);
 
   useEffect(() => {
     loadProducts();
@@ -153,9 +155,16 @@ const NewSale = () => {
         customer: customer.name ? customer : undefined
       };
 
-      await saleService.create(saleData);
-      alert('Venta registrada exitosamente');
-      navigate('/sales');
+      const { data } = await saleService.create(saleData);
+
+      setSaleSummary({
+        saleNumber: data?.sale?.saleNumber || data?.saleNumber || null,
+        itemCount: cart.length,
+        total: calculateTotal(),
+        paymentMethod,
+        change: paymentMethod === 'efectivo' ? calculateChange() : 0
+      });
+      setShowSuccessModal(true);
     } catch (error) {
       console.error('Error al registrar venta:', error);
       alert(error.response?.data?.message || 'Error al registrar venta');
@@ -164,12 +173,42 @@ const NewSale = () => {
     }
   };
 
+  const resetSaleForm = () => {
+    setCart([]);
+    setCustomer({ name: '', phone: '', email: '' });
+    setDiscount(0);
+    setAmountPaid('');
+    setPaymentMethod('efectivo');
+  };
+
+  const handleNewSale = () => {
+    resetSaleForm();
+    setShowSuccessModal(false);
+    setSaleSummary(null);
+  };
+
+  const handleGoToHistory = () => {
+    resetSaleForm();
+    setShowSuccessModal(false);
+    navigate('/sales');
+  };
+
   const getPaymentIcon = () => {
     switch(paymentMethod) {
       case 'efectivo': return <FiDollarSign />;
       case 'tarjeta': return <FiCreditCard />;
       default: return <FiDollarSign />;
     }
+  };
+
+  const getPaymentMethodLabel = () => {
+    const labels = {
+      efectivo: 'Efectivo',
+      tarjeta: 'Tarjeta',
+      transferencia: 'Transferencia',
+      credito: 'Crédito'
+    };
+    return labels[paymentMethod] || paymentMethod;
   };
 
   return (
@@ -216,7 +255,7 @@ const NewSale = () => {
                       <div className="suggestion-info">
                         <div className="product-suggestion-name">{product.name}</div>
                         <div className="product-suggestion-meta">
-                          <span className="suggestion-price">${parseFloat(product.price).toFixed(2)}</span>
+                          <span className="suggestion-price">Bs {parseFloat(product.price).toFixed(2)}</span>
                           <span className="suggestion-stock">Stock: {product.stock}</span>
                         </div>
                       </div>
@@ -249,7 +288,7 @@ const NewSale = () => {
                     </div>
                     <div className="cart-item-info">
                       <div className="cart-item-name">{item.name}</div>
-                      <div className="cart-item-price">${item.price.toFixed(2)} c/u</div>
+                      <div className="cart-item-price">Bs {item.price.toFixed(2)} c/u</div>
                     </div>
                     <div className="cart-item-controls">
                       <button
@@ -272,7 +311,7 @@ const NewSale = () => {
                       </button>
                     </div>
                     <div className="cart-item-subtotal">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      Bs {(item.price * item.quantity).toFixed(2)}
                     </div>
                     <button
                       className="btn-remove"
@@ -297,11 +336,11 @@ const NewSale = () => {
             <div className="summary-lines">
               <div className="summary-line">
                 <span>Subtotal:</span>
-                <span>${calculateSubtotal().toFixed(2)}</span>
+                <span>Bs {calculateSubtotal().toFixed(2)}</span>
               </div>
               <div className="summary-line">
                 <span>IVA (16%):</span>
-                <span>${calculateTax().toFixed(2)}</span>
+                <span>Bs {calculateTax().toFixed(2)}</span>
               </div>
               <div className="summary-line discount-line">
                 <span>
@@ -309,7 +348,7 @@ const NewSale = () => {
                   Descuento:
                 </span>
                 <div className="discount-input-wrapper">
-                  <span>$</span>
+                  <span>Bs</span>
                   <input
                     type="number"
                     step="0.01"
@@ -321,7 +360,7 @@ const NewSale = () => {
               </div>
               <div className="summary-line total">
                 <span>Total:</span>
-                <span className="total-amount">${calculateTotal().toFixed(2)}</span>
+                <span className="total-amount">Bs {calculateTotal().toFixed(2)}</span>
               </div>
             </div>
 
@@ -361,7 +400,7 @@ const NewSale = () => {
                   </div>
                   <div className={`change-display ${calculateChange() < 0 ? 'negative' : 'positive'}`}>
                     <span>Cambio:</span>
-                    <span className="change-amount">${calculateChange().toFixed(2)}</span>
+                    <span className="change-amount">Bs {calculateChange().toFixed(2)}</span>
                   </div>
                 </>
               )}
@@ -425,6 +464,50 @@ const NewSale = () => {
           </form>
         </div>
       </div>
+
+      {showSuccessModal && saleSummary && (
+        <div className="modal-overlay">
+          <div className="modal sale-success-modal">
+            <div className="sale-success-icon">
+              <FiCheck />
+            </div>
+            <h2>Venta registrada exitosamente</h2>
+            {saleSummary.saleNumber && (
+              <p className="sale-success-number">{saleSummary.saleNumber}</p>
+            )}
+
+            <div className="sale-success-details">
+              <div className="sale-success-row">
+                <span>Productos</span>
+                <b>{saleSummary.itemCount}</b>
+              </div>
+              <div className="sale-success-row">
+                <span>Método de pago</span>
+                <b>{getPaymentMethodLabel()}</b>
+              </div>
+              <div className="sale-success-row total">
+                <span>Total cobrado</span>
+                <b>Bs {saleSummary.total.toFixed(2)}</b>
+              </div>
+              {saleSummary.paymentMethod === 'efectivo' && (
+                <div className="sale-success-row change">
+                  <span>Cambio entregado</span>
+                  <b>Bs {saleSummary.change.toFixed(2)}</b>
+                </div>
+              )}
+            </div>
+
+            <div className="sale-success-actions">
+              <button className="btn btn-outline" onClick={handleGoToHistory}>
+                Ver Historial
+              </button>
+              <button className="btn btn-primary" onClick={handleNewSale}>
+                Nueva Venta
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </Layout>
   );
 };

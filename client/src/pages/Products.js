@@ -237,7 +237,7 @@ const Products = () => {
                       {product.category}
                     </span>
                   </td>
-                  <td className="price-cell">${parseFloat(product.price).toFixed(2)}</td>
+                  <td className="price-cell">Bs {parseFloat(product.price).toFixed(2)}</td>
                   <td>
                     <span className={`stock-badge ${product.isLowStock ? 'low-stock' : ''}`}>
                       {product.isLowStock && <FiAlertTriangle />}
