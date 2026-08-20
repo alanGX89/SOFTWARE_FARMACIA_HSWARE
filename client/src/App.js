@@ -10,6 +10,7 @@ import NewSale from './pages/NewSale';
 import Users from './pages/Users';
 import Suppliers from './pages/Suppliers';
 import Reports from './pages/Reports';
+import Consultations from './pages/Consultations';
 import ManualPage from './pages/ManualPage';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
           <Route path="/users" element={<PrivateRoute roles={['admin']}><Users /></PrivateRoute>} />
           <Route path="/suppliers" element={<PrivateRoute roles={['admin', 'pharmacist']}><Suppliers /></PrivateRoute>} />
           <Route path="/reports" element={<PrivateRoute roles={['admin', 'pharmacist']}><Reports /></PrivateRoute>} />
+          <Route path="/consultations" element={<PrivateRoute roles={['admin', 'pharmacist']}><Consultations /></PrivateRoute>} />
 
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
