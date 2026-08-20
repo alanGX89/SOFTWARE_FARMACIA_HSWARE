@@ -3,7 +3,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #1a2634 0%, #0d1520 50%, #0a0f14 100%);
+  background: linear-gradient(135deg, #eceaff 0%, #f7f8fa 45%, #ffede0 100%);
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -14,7 +14,7 @@
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(69, 69, 253, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(69, 69, 253, 0.18) 0%, transparent 70%);
   top: -200px;
   right: -200px;
 }
@@ -22,11 +22,11 @@
 .login-container::after {
   content: '';
   position: absolute;
-  width: 400px;
-  height: 400px;
-  background: radial-gradient(circle, rgba(254, 100, 4, 0.15) 0%, transparent 70%);
-  bottom: -100px;
-  left: -100px;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(254, 100, 4, 0.16) 0%, transparent 70%);
+  bottom: -120px;
+  left: -120px;
 }
 
 .login-card {
@@ -35,7 +35,8 @@
   padding: 48px 40px;
   max-width: 440px;
   width: 100%;
-  box-shadow: 0 25px 80px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 25px 60px rgba(30, 36, 48, 0.12);
+  border: 1px solid #eef0f3;
   position: relative;
   z-index: 1;
 }
@@ -46,7 +47,7 @@
 }
 
 .login-logo {
-  max-width: 240px;
+  max-width: 130px;
   height: auto;
   margin-bottom: 16px;
 }
@@ -318,7 +319,7 @@
   }
 
   .login-logo {
-    max-width: 200px;
+    max-width: 110px;
   }
 
   .quick-login-buttons {
@@ -341,7 +342,7 @@
   }
 
   .login-logo {
-    max-width: 160px;
+    max-width: 90px;
   }
 
   .login-header {
