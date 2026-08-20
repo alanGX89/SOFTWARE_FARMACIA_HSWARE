@@ -3,7 +3,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #eceaff 0%, #f7f8fa 45%, #ffede0 100%);
+  background-image:
+    linear-gradient(135deg, rgba(69, 69, 253, 0.82) 0%, rgba(47, 47, 207, 0.78) 45%, rgba(201, 78, 0, 0.75) 100%),
+    url('/img/fondo-login.jpg');
+  background-size: cover;
+  background-position: center;
   padding: 20px;
   position: relative;
   overflow: hidden;
@@ -14,7 +18,7 @@
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(69, 69, 253, 0.18) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 205, 0, 0.25) 0%, transparent 70%);
   top: -200px;
   right: -200px;
 }
@@ -24,7 +28,7 @@
   position: absolute;
   width: 450px;
   height: 450px;
-  background: radial-gradient(circle, rgba(254, 100, 4, 0.16) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(0, 205, 255, 0.2) 0%, transparent 70%);
   bottom: -120px;
   left: -120px;
 }
@@ -35,7 +39,7 @@
   padding: 48px 40px;
   max-width: 440px;
   width: 100%;
-  box-shadow: 0 25px 60px rgba(30, 36, 48, 0.12);
+  box-shadow: 0 25px 70px rgba(10, 12, 30, 0.35);
   border: 1px solid #eef0f3;
   position: relative;
   z-index: 1;
