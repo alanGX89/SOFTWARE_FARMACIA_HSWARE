@@ -99,7 +99,7 @@
 }
 
 .stat-card.stat-primary .stat-icon-container {
-  background: linear-gradient(135deg, rgba(27, 139, 61, 0.15) 0%, rgba(27, 139, 61, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(69, 69, 253, 0.15) 0%, rgba(69, 69, 253, 0.08) 100%);
   color: var(--primary);
 }
 
@@ -186,7 +186,7 @@
   background: var(--primary);
   color: white;
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(27, 139, 61, 0.25);
+  box-shadow: 0 8px 20px rgba(69, 69, 253, 0.25);
 }
 
 .quick-action:hover .quick-action-icon-container {

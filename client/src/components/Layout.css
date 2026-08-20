@@ -61,7 +61,7 @@
 }
 
 .nav-item.active {
-  background: linear-gradient(135deg, rgba(27, 139, 61, 0.25) 0%, rgba(27, 139, 61, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(69, 69, 253, 0.28) 0%, rgba(69, 69, 253, 0.15) 100%);
   color: white;
   border-left: none;
   box-shadow: inset 3px 0 0 var(--primary);
@@ -100,7 +100,7 @@
 .user-avatar {
   width: 42px;
   height: 42px;
-  background: linear-gradient(135deg, var(--primary) 0%, #0f9b4d 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
   border-radius: 10px;
   display: flex;
   align-items: center;

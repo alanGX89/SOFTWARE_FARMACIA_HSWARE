@@ -20,7 +20,7 @@
 }
 
 .user-avatar.role-pharmacist {
-  background: linear-gradient(135deg, rgba(27, 139, 61, 0.15) 0%, rgba(27, 139, 61, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(69, 69, 253, 0.15) 0%, rgba(69, 69, 253, 0.08) 100%);
   color: var(--primary);
 }
 
@@ -63,7 +63,7 @@
 }
 
 .role-badge.role-pharmacist {
-  background: rgba(27, 139, 61, 0.15);
+  background: rgba(69, 69, 253, 0.15);
   color: var(--primary);
 }
 

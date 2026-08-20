@@ -5,19 +5,20 @@
 }
 
 :root {
-  /* PharmaCare Brand Colors */
-  --primary: #1B8B3D;
-  --primary-dark: #146B2F;
-  --primary-light: #2AAF4F;
-  --secondary: #2D2D2D;
-  --success: #1B8B3D;
-  --danger: #DC3545;
-  --warning: #FFC107;
-  --info: #17A2B8;
-  --dark: #1A1A1A;
-  --light: #F8F9FA;
-  --gray: #6C757D;
-  --border: #DEE2E6;
+  /* Jasilmed Brand Colors — extraídos del logo oficial */
+  --primary: #4545FD;
+  --primary-dark: #2F2FCF;
+  --primary-light: #6E6EFF;
+  --secondary: #FE6404;
+  --secondary-dark: #C94E00;
+  --success: #16A34A;
+  --danger: #F80404;
+  --warning: #FFCD00;
+  --info: #00CDFF;
+  --dark: #1E2430;
+  --light: #F7F8FA;
+  --gray: #5C6472;
+  --border: #E5E8EC;
   --white: #FFFFFF;
 }
 
@@ -138,7 +139,7 @@ a {
 .form-group select:focus,
 .form-group textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(27, 139, 61, 0.15);
+  box-shadow: 0 0 0 3px rgba(69, 69, 253, 0.15);
 }
 
 .table {
@@ -176,23 +177,23 @@ a {
 }
 
 .badge-success {
-  background: #D4EDDA;
-  color: #155724;
+  background: #DCFCE7;
+  color: #166534;
 }
 
 .badge-danger {
-  background: #fee2e2;
-  color: #991b1b;
+  background: #FFE3E3;
+  color: #C40303;
 }
 
 .badge-warning {
-  background: #fef3c7;
-  color: #92400e;
+  background: #FFF7D9;
+  color: #92720A;
 }
 
 .badge-info {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #E0F9FF;
+  color: #0099C2;
 }
 
 .alert {
@@ -203,21 +204,21 @@ a {
 }
 
 .alert-success {
-  background: #D4EDDA;
-  color: #155724;
-  border: 1px solid #C3E6CB;
+  background: #DCFCE7;
+  color: #166534;
+  border: 1px solid #86EFAC;
 }
 
 .alert-danger {
-  background: #fee2e2;
-  color: #991b1b;
-  border: 1px solid #fca5a5;
+  background: #FFE3E3;
+  color: #C40303;
+  border: 1px solid #FFB3B3;
 }
 
 .alert-info {
-  background: #dbeafe;
-  color: #1e40af;
-  border: 1px solid #93c5fd;
+  background: #E0F9FF;
+  color: #0099C2;
+  border: 1px solid #99EAFF;
 }
 
 .loading {

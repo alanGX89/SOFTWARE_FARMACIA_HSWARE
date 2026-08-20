@@ -14,7 +14,7 @@
   position: absolute;
   width: 600px;
   height: 600px;
-  background: radial-gradient(circle, rgba(27, 139, 61, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(69, 69, 253, 0.2) 0%, transparent 70%);
   top: -200px;
   right: -200px;
 }
@@ -24,7 +24,7 @@
   position: absolute;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(27, 139, 61, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(254, 100, 4, 0.15) 0%, transparent 70%);
   bottom: -100px;
   left: -100px;
 }
@@ -161,7 +161,7 @@
 .input-wrapper input:focus {
   border-color: var(--primary);
   background: white;
-  box-shadow: 0 0 0 4px rgba(27, 139, 61, 0.1);
+  box-shadow: 0 0 0 4px rgba(69, 69, 253, 0.1);
   outline: none;
 }
 
@@ -184,7 +184,7 @@
 }
 
 .btn-primary {
-  background: linear-gradient(135deg, var(--primary) 0%, #0f9b4d 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
   border: none;
   cursor: pointer;
@@ -192,7 +192,7 @@
 
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(27, 139, 61, 0.35);
+  box-shadow: 0 8px 20px rgba(69, 69, 253, 0.35);
 }
 
 .btn-primary:disabled {
@@ -274,9 +274,9 @@
 }
 
 .btn-quick-login.pharmacist {
-  background: rgba(27, 139, 61, 0.1);
+  background: rgba(69, 69, 253, 0.1);
   color: var(--primary);
-  border-color: rgba(27, 139, 61, 0.2);
+  border-color: rgba(69, 69, 253, 0.2);
 }
 
 .btn-quick-login.pharmacist:hover:not(:disabled) {
@@ -284,7 +284,7 @@
   color: white;
   border-color: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(27, 139, 61, 0.3);
+  box-shadow: 0 6px 16px rgba(69, 69, 253, 0.3);
 }
 
 .btn-quick-login.cashier {

@@ -86,7 +86,7 @@
 
 .search-product input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(27, 139, 61, 0.1);
+  box-shadow: 0 0 0 4px rgba(69, 69, 253, 0.1);
   outline: none;
 }
 
@@ -130,7 +130,7 @@
 .suggestion-icon {
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, rgba(27, 139, 61, 0.1) 0%, rgba(27, 139, 61, 0.05) 100%);
+  background: linear-gradient(135deg, rgba(69, 69, 253, 0.1) 0%, rgba(69, 69, 253, 0.05) 100%);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -418,7 +418,7 @@
 .form-group input:focus,
 .form-group select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(27, 139, 61, 0.1);
+  box-shadow: 0 0 0 4px rgba(69, 69, 253, 0.1);
   outline: none;
 }
 
@@ -496,14 +496,14 @@
 }
 
 .btn-success {
-  background: linear-gradient(135deg, var(--primary) 0%, #0f9b4d 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: white;
   border: none;
 }
 
 .btn-success:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(27, 139, 61, 0.35);
+  box-shadow: 0 6px 20px rgba(69, 69, 253, 0.35);
 }
 
 .btn-success:disabled {

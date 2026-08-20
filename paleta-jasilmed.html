@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paleta de Colores · Farmacias Jasilmed</title>
+<style>
+  :root{
+    --blue:#4545fd;
+    --blue-dark:#2f2fcf;
+    --blue-light:#eceaff;
+    --orange:#fe6404;
+    --orange-dark:#c94e00;
+    --orange-light:#ffede0;
+    --yellow:#ffcd00;
+    --yellow-dark:#c99f00;
+    --yellow-light:#fff7d9;
+    --cyan:#00cdff;
+    --cyan-dark:#0099c2;
+    --cyan-light:#e0f9ff;
+    --red:#f80404;
+    --red-dark:#c40303;
+    --red-light:#ffe3e3;
+    --text:#1e2430;
+    --text-soft:#5c6472;
+    --bg:#ffffff;
+    --bg-soft:#f7f8fa;
+    --border:#e5e8ec;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,Helvetica,sans-serif;color:var(--text);background:var(--bg-soft);line-height:1.6}
+  .wrap{max-width:1080px;margin:0 auto;padding:50px 32px 100px}
+
+  .hero{
+    display:flex;align-items:center;gap:32px;background:#fff;border:1px solid var(--border);
+    border-radius:18px;padding:36px 40px;margin-bottom:44px;
+  }
+  .hero img{height:110px;flex-shrink:0}
+  .hero h1{font-size:30px;font-weight:900;color:var(--text);margin-bottom:8px}
+  .hero p{font-size:15px;color:var(--text-soft);max-width:560px}
+
+  h2{font-size:20px;font-weight:800;color:var(--text);margin:46px 0 6px;display:flex;align-items:center;gap:10px}
+  h2 .dot{width:10px;height:10px;border-radius:50%;background:var(--blue)}
+  .sec-desc{font-size:14px;color:var(--text-soft);margin-bottom:20px;max-width:640px}
+
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}
+
+  .swatch{border:1px solid var(--border);border-radius:14px;overflow:hidden;background:#fff}
+  .swatch .fill{height:110px;display:flex;align-items:flex-end;padding:12px}
+  .swatch .fill span{font-size:12px;font-weight:800;color:#fff;background:rgba(0,0,0,.25);padding:3px 9px;border-radius:20px}
+  .swatch .info{padding:14px 16px}
+  .swatch .name{font-size:15px;font-weight:800;margin-bottom:6px}
+  .swatch .codes{font-size:12.5px;color:var(--text-soft);display:flex;flex-direction:column;gap:2px}
+  .swatch .codes code{font-family:'Consolas',monospace;background:var(--bg-soft);border:1px solid var(--border);border-radius:5px;padding:1px 6px}
+  .swatch .usage{font-size:12.5px;color:var(--text-soft);margin-top:8px;padding-top:8px;border-top:1px dashed var(--border)}
+
+  .shades{display:flex;border-radius:12px;overflow:hidden;border:1px solid var(--border);margin-bottom:14px}
+  .shades .cell{flex:1;height:64px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:8px}
+  .shades .cell span{font-size:11px;font-weight:800;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,.3)}
+  .shades .cell.on-light span{color:#1e2430;text-shadow:none}
+
+  .combo-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-bottom:10px}
+  .combo{border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:6px}
+  .combo b{font-size:14px}
+  .combo span{font-size:12.5px;opacity:.85}
+
+  .gradient-bar{height:90px;border-radius:14px;margin:14px 0 8px;
+    background:conic-gradient(from 45deg, var(--yellow) 0deg 90deg, var(--cyan) 90deg 180deg, var(--blue) 180deg 270deg, var(--orange) 270deg 360deg);
+  }
+
+  .contrast-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:13.5px}
+  .contrast-table th,.contrast-table td{border:1px solid var(--border);padding:10px 12px;text-align:left}
+  .contrast-table th{background:#fff;font-weight:800}
+  .pill{display:inline-block;padding:4px 12px;border-radius:20px;font-size:12px;font-weight:800}
+
+  footer{margin-top:60px;padding-top:24px;border-top:1px solid var(--border);text-align:center;font-size:13px;color:#9aa3ad}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <img src="docs/logo_farm_jasilmed.jpeg" alt="Farmacias Jasilmed">
+    <div>
+      <h1>Paleta de colores · Farmacias Jasilmed</h1>
+      <p>Colores extraídos directamente del logo oficial (los 4 pétalos de la cruz médica) para usar de forma consistente en banners, manuales, sistema y material de marca.</p>
+    </div>
+  </div>
+
+  <!-- PRIMARIOS -->
+  <h2><span class="dot"></span>Colores primarios de marca</h2>
+  <p class="sec-desc">El azul y el naranja son los colores del texto del logo («Jasilmed» y «FARMACIAS»); son los que deben dominar en interfaces, títulos y botones principales.</p>
+  <div class="grid">
+    <div class="swatch">
+      <div class="fill" style="background:#4545fd"><span>Azul Jasilmed</span></div>
+      <div class="info">
+        <div class="name">Azul Jasilmed</div>
+        <div class="codes"><code>#4545FD</code><span>RGB 69, 69, 253</span></div>
+        <div class="usage">Uso: texto "Jasilmed", botones primarios, enlaces, encabezados.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#fe6404"><span>Naranja Farmacias</span></div>
+      <div class="info">
+        <div class="name">Naranja Farmacias</div>
+        <div class="codes"><code>#FE6404</code><span>RGB 254, 100, 4</span></div>
+        <div class="usage">Uso: texto "FARMACIAS", acentos, llamados a la acción secundarios.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECUNDARIOS / PETALOS -->
+  <h2><span class="dot" style="background:var(--yellow)"></span>Colores secundarios (pétalos del logo)</h2>
+  <p class="sec-desc">Colores de apoyo tomados de los 4 pétalos de la cruz. Úsalos como acentos puntuales (íconos, badges, gráficas), no como color dominante de fondo.</p>
+  <div class="grid">
+    <div class="swatch">
+      <div class="fill" style="background:#ffcd00"><span>Amarillo</span></div>
+      <div class="info">
+        <div class="name">Amarillo Jasilmed</div>
+        <div class="codes"><code>#FFCD00</code><span>RGB 255, 205, 0</span></div>
+        <div class="usage">Uso: destacados, iconografía de energía/rapidez, badges de promoción.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#00cdff"><span>Celeste</span></div>
+      <div class="info">
+        <div class="name">Celeste Jasilmed</div>
+        <div class="codes"><code>#00CDFF</code><span>RGB 0, 205, 255</span></div>
+        <div class="usage">Uso: información, elementos de salud/bienestar, fondos suaves.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#f80404"><span>Rojo</span></div>
+      <div class="info">
+        <div class="name">Rojo Jasilmed</div>
+        <div class="codes"><code>#F80404</code><span>RGB 248, 4, 4</span></div>
+        <div class="usage">Uso: alertas, urgencias, cruz médica, errores del sistema.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#494af2"><span>Azul-violeta</span></div>
+      <div class="info">
+        <div class="name">Azul-violeta</div>
+        <div class="codes"><code>#494AF2</code><span>RGB 73, 74, 242</span></div>
+        <div class="usage">Uso: variante del azul primario para degradados y hover states.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEUTROS -->
+  <h2><span class="dot" style="background:#c9ccd1"></span>Neutros</h2>
+  <p class="sec-desc">Blanco de la cruz del logo + escala de grises para texto, fondos y bordes de interfaz.</p>
+  <div class="grid">
+    <div class="swatch">
+      <div class="fill" style="background:#ffffff;border-bottom:1px solid #e5e8ec"><span style="background:rgba(0,0,0,.4)">Blanco</span></div>
+      <div class="info">
+        <div class="name">Blanco (cruz)</div>
+        <div class="codes"><code>#FFFFFF</code><span>RGB 255, 255, 255</span></div>
+        <div class="usage">Uso: fondos principales, cruz médica, texto sobre colores oscuros.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#1e2430"><span>Texto principal</span></div>
+      <div class="info">
+        <div class="name">Gris oscuro (texto)</div>
+        <div class="codes"><code>#1E2430</code><span>RGB 30, 36, 48</span></div>
+        <div class="usage">Uso: texto principal, títulos sobre fondo blanco.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#5c6472"><span>Texto secundario</span></div>
+      <div class="info">
+        <div class="name">Gris medio (texto secundario)</div>
+        <div class="codes"><code>#5C6472</code><span>RGB 92, 100, 114</span></div>
+        <div class="usage">Uso: descripciones, texto de apoyo, subtítulos.</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="fill" style="background:#f7f8fa;border-bottom:1px solid #e5e8ec"><span style="background:rgba(0,0,0,.35)">Fondo suave</span></div>
+      <div class="info">
+        <div class="name">Gris muy claro</div>
+        <div class="codes"><code>#F7F8FA</code><span>RGB 247, 248, 250</span></div>
+        <div class="usage">Uso: fondo general de páginas, tarjetas alternas.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ESCALAS DE TINTES -->
+  <h2><span class="dot"></span>Tintes y sombras (para UI)</h2>
+  <p class="sec-desc">Variaciones claras/oscuras de cada color principal, listas para usar en estados hover, fondos de badge y bordes.</p>
+
+  <div class="shades">
+    <div class="cell" style="background:#eceaff" title="#ECEAFF"><span style="color:#1e2430">Light</span></div>
+    <div class="cell" style="background:#4545fd" title="#4545FD"><span>Base</span></div>
+    <div class="cell" style="background:#2f2fcf" title="#2F2FCF"><span>Dark</span></div>
+  </div>
+  <div class="shades">
+    <div class="cell" style="background:#ffede0" title="#FFEDE0"><span style="color:#1e2430">Light</span></div>
+    <div class="cell" style="background:#fe6404" title="#FE6404"><span>Base</span></div>
+    <div class="cell" style="background:#c94e00" title="#C94E00"><span>Dark</span></div>
+  </div>
+  <div class="shades">
+    <div class="cell" style="background:#fff7d9" title="#FFF7D9"><span style="color:#1e2430">Light</span></div>
+    <div class="cell" style="background:#ffcd00" title="#FFCD00"><span style="color:#1e2430">Base</span></div>
+    <div class="cell" style="background:#c99f00" title="#C99F00"><span>Dark</span></div>
+  </div>
+  <div class="shades">
+    <div class="cell" style="background:#e0f9ff" title="#E0F9FF"><span style="color:#1e2430">Light</span></div>
+    <div class="cell" style="background:#00cdff" title="#00CDFF"><span style="color:#1e2430">Base</span></div>
+    <div class="cell" style="background:#0099c2" title="#0099C2"><span>Dark</span></div>
+  </div>
+  <div class="shades">
+    <div class="cell" style="background:#ffe3e3" title="#FFE3E3"><span style="color:#1e2430">Light</span></div>
+    <div class="cell" style="background:#f80404" title="#F80404"><span>Base</span></div>
+    <div class="cell" style="background:#c40303" title="#C40303"><span>Dark</span></div>
+  </div>
+
+  <!-- DEGRADADO DE MARCA -->
+  <h2><span class="dot"></span>Degradado de marca (4 pétalos)</h2>
+  <p class="sec-desc">Combinación de los 4 colores del logo, útil para encabezados, portadas de manuales o fondos decorativos que evoquen la cruz médica.</p>
+  <div class="gradient-bar"></div>
+
+  <!-- COMBINACIONES DE USO -->
+  <h2><span class="dot"></span>Combinaciones recomendadas</h2>
+  <div class="combo-row">
+    <div class="combo" style="background:#4545fd;color:#fff">
+      <b>Botón / encabezado primario</b>
+      <span>Fondo #4545FD + texto blanco</span>
+    </div>
+    <div class="combo" style="background:#eceaff;color:#2f2fcf">
+      <b>Fondo suave con acento azul</b>
+      <span>Fondo #ECEAFF + texto #2F2FCF</span>
+    </div>
+    <div class="combo" style="background:#fe6404;color:#fff">
+      <b>Llamado a la acción</b>
+      <span>Fondo #FE6404 + texto blanco</span>
+    </div>
+    <div class="combo" style="background:#fff7d9;color:#c99f00">
+      <b>Badge de promoción</b>
+      <span>Fondo #FFF7D9 + texto #C99F00</span>
+    </div>
+    <div class="combo" style="background:#ffe3e3;color:#c40303">
+      <b>Alerta / error</b>
+      <span>Fondo #FFE3E3 + texto #C40303</span>
+    </div>
+    <div class="combo" style="background:#e0f9ff;color:#0099c2">
+      <b>Información / nota</b>
+      <span>Fondo #E0F9FF + texto #0099C2</span>
+    </div>
+  </div>
+
+  <!-- CONTRASTE / ACCESIBILIDAD -->
+  <h2><span class="dot"></span>Legibilidad de texto sobre cada color</h2>
+  <table class="contrast-table">
+    <thead><tr><th>Color de fondo</th><th>Mejor color de texto</th><th>Recomendación</th></tr></thead>
+    <tbody>
+      <tr><td><span class="pill" style="background:#4545fd;color:#fff">#4545FD</span></td><td>Blanco</td><td>Buen contraste, apto para botones y encabezados</td></tr>
+      <tr><td><span class="pill" style="background:#fe6404;color:#fff">#FE6404</span></td><td>Blanco</td><td>Buen contraste, apto para CTA</td></tr>
+      <tr><td><span class="pill" style="background:#ffcd00;color:#1e2430">#FFCD00</span></td><td>Gris oscuro / negro</td><td>El blanco casi no se lee sobre amarillo, usar texto oscuro</td></tr>
+      <tr><td><span class="pill" style="background:#00cdff;color:#1e2430">#00CDFF</span></td><td>Gris oscuro / azul oscuro</td><td>Evitar blanco puro, prefiere texto oscuro o azul marca</td></tr>
+      <tr><td><span class="pill" style="background:#f80404;color:#fff">#F80404</span></td><td>Blanco</td><td>Buen contraste, ideal para alertas críticas</td></tr>
+    </tbody>
+  </table>
+
+  <footer>
+    Paleta de marca · Farmacias Jasilmed — extraída del logo oficial (docs/logo_farm_jasilmed.jpeg)
+  </footer>
+
+</div>
+</body>
+</html>

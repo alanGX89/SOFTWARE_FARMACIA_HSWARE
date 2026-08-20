@@ -7,7 +7,7 @@
 .supplier-icon {
   width: 42px;
   height: 42px;
-  background: linear-gradient(135deg, rgba(27, 139, 61, 0.15) 0%, rgba(27, 139, 61, 0.08) 100%);
+  background: linear-gradient(135deg, rgba(69, 69, 253, 0.15) 0%, rgba(69, 69, 253, 0.08) 100%);
   border-radius: 10px;
   display: flex;
   align-items: center;
@@ -188,7 +188,7 @@
 
 .form-group textarea:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(27, 139, 61, 0.1);
+  box-shadow: 0 0 0 4px rgba(69, 69, 253, 0.1);
   outline: none;
 }
 

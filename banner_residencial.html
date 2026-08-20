@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ResidencialPro — Sistema de Gestión</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap');
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --w950: #1a0a03;
+      --w900: #2c1a0e;
+      --w800: #3d2010;
+      --w700: #5c3317;
+      --w600: #7a4520;
+      --w500: #a05c2e;
+      --w400: #c68642;
+      --w300: #d4a96a;
+      --w200: #e8c99a;
+      --w100: #f2dbb5;
+      --w50:  #faf6f0;
+      --w25:  #fdfaf5;
+      --gold: #c9a45a;
+      --gold2:#e8c97a;
+      --s900: #1a0f08;
+      --s700: #3d2e22;
+      --s500: #7a6352;
+      --s300: #b8a898;
+      --s100: #ede8e2;
+      --white:#ffffff;
+    }
+
+    body { font-family: 'Inter', system-ui, sans-serif; background: var(--w50); }
+
+    /* ── HERO ── */
+    .hero {
+      background:
+        linear-gradient(160deg, rgba(26,10,3,0.90) 0%, rgba(61,32,16,0.85) 40%, rgba(122,69,32,0.78) 70%, rgba(198,134,66,0.72) 100%),
+        url('resiedenclal_foto.jpg') center / cover no-repeat;
+      padding: 60px 24px 120px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* textura madera sutil */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        repeating-linear-gradient(
+          92deg,
+          transparent 0px, transparent 40px,
+          rgba(255,255,255,.018) 40px, rgba(255,255,255,.018) 41px
+        ),
+        repeating-linear-gradient(
+          178deg,
+          transparent 0px, transparent 80px,
+          rgba(0,0,0,.06) 80px, rgba(0,0,0,.06) 82px
+        );
+    }
+
+    /* curva inferior */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: -2px; left: 0; right: 0; height: 70px;
+      background: var(--w50);
+      clip-path: ellipse(55% 100% at 50% 100%);
+    }
+
+    /* veta de madera decorativa */
+    .wood-line {
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, transparent, var(--gold), var(--gold2), var(--gold), transparent);
+    }
+
+    /* logos */
+    .logos-row {
+      display: flex; align-items: center; justify-content: center;
+      gap: 18px; margin-bottom: 36px; position: relative;
+    }
+    .logo-brand {
+      height: 48px; object-fit: contain;
+      filter: brightness(0) invert(1) drop-shadow(0 2px 8px rgba(0,0,0,.4));
+    }
+    .logo-sep {
+      width: 1px; height: 36px;
+      background: linear-gradient(180deg, transparent, rgba(201,164,90,.6), transparent);
+    }
+
+    /* badge */
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(201,164,90,.12);
+      border: 1px solid rgba(201,164,90,.35);
+      color: var(--gold2); font-size: 11px; font-weight: 600;
+      letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 100px;
+      margin-bottom: 24px; position: relative;
+    }
+    .badge-dot { width: 6px; height: 6px; background: var(--gold2); border-radius: 50%; animation: blink 2s infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.3;transform:scale(1.6)} }
+
+    /* tagline decorativa */
+    .hero-eyebrow {
+      font-family: 'Playfair Display', serif;
+      font-size: 13px; font-weight: 600;
+      color: var(--gold); letter-spacing: .25em;
+      text-transform: uppercase; margin-bottom: 14px;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 5vw, 58px);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; letter-spacing: -.01em;
+      margin-bottom: 16px; position: relative;
+    }
+    .hero h1 em { color: var(--gold2); font-style: normal; }
+
+    .hero-sub {
+      font-size: clamp(14px, 1.8vw, 17px);
+      color: rgba(255,255,255,.6);
+      max-width: 520px; margin: 0 auto 10px;
+      line-height: 1.7; position: relative;
+    }
+    .hero-note { font-size: 12px; color: rgba(255,255,255,.32); position: relative; }
+
+    /* ornamento */
+    .ornament {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; margin: 20px auto 0; position: relative;
+    }
+    .orn-line { width: 60px; height: 1px; background: linear-gradient(90deg, transparent, var(--gold)); }
+    .orn-line.r { background: linear-gradient(90deg, var(--gold), transparent); }
+
+    /* ── PLANS ── */
+    .plans {
+      max-width: 1080px; margin: -70px auto 0;
+      padding: 0 20px 80px;
+      display: grid; grid-template-columns: repeat(3,1fr); gap: 20px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 20px;
+      border: 1px solid var(--w100);
+      padding: 36px 28px 38px;
+      display: flex; flex-direction: column;
+      position: relative;
+      transition: transform .25s, box-shadow .25s;
+      box-shadow: 0 4px 24px rgba(44,26,14,.07);
+    }
+    .card:hover { transform: translateY(-6px); box-shadow: 0 20px 56px rgba(44,26,14,.13); }
+
+    .card.featured {
+      border: 2px solid var(--gold);
+      box-shadow: 0 8px 40px rgba(201,164,90,.18);
+      background: linear-gradient(180deg, #fffef9 0%, var(--white) 100%);
+    }
+    .card.featured:hover { box-shadow: 0 20px 60px rgba(201,164,90,.28); }
+
+    /* top accent line per card */
+    .card-accent {
+      position: absolute; top: 0; left: 24px; right: 24px; height: 3px;
+      border-radius: 0 0 4px 4px;
+    }
+    .accent-a { background: linear-gradient(90deg, var(--w300), var(--w200)); }
+    .accent-b { background: linear-gradient(90deg, var(--w700), var(--gold), var(--w700)); }
+    .accent-c { background: linear-gradient(90deg, var(--w950), var(--w700)); }
+
+    .featured-tag {
+      position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(90deg, var(--w700), var(--gold));
+      color: var(--white); font-size: 10px; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      padding: 5px 20px; border-radius: 100px; white-space: nowrap;
+    }
+
+    /* plan icon */
+    .plan-icon {
+      width: 52px; height: 52px; border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .icon-a { background: var(--w50); border: 1px solid var(--w100); }
+    .icon-b { background: linear-gradient(135deg, var(--w700), var(--w500)); }
+    .icon-c { background: var(--w950); border: 1px solid var(--w800); }
+
+    .plan-label { font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; margin-bottom: 5px; }
+    .label-a { color: var(--w400); }
+    .label-b { color: var(--gold); }
+    .label-c { color: var(--w500); }
+
+    .plan-title { font-family:'Playfair Display',serif; font-size: 20px; font-weight: 700; color: var(--s900); margin-bottom: 8px; }
+    .plan-desc  { font-size: 13px; color: var(--s500); line-height: 1.6; margin-bottom: 24px; }
+
+    /* price */
+    .price-block { margin-bottom: 20px; }
+    .price-row   { display: flex; align-items: flex-end; gap: 4px; }
+    .modality    { font-size: 11px; font-weight: 600; color: var(--s300); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 4px; }
+    .cur   { font-size: 16px; font-weight: 700; color: var(--s500); margin-bottom: 8px; }
+    .amt   { font-size: 46px; font-weight: 900; color: var(--s900); line-height: 1; letter-spacing: -.03em; }
+    .amt.gold { color: var(--w600); }
+    .mo    { font-size: 13px; color: var(--s300); margin-bottom: 8px; }
+    .price-note { font-size: 11.5px; color: var(--s300); }
+    .price-tag  {
+      display: inline-block; font-size: 11px; font-weight: 700;
+      background: var(--w50); color: var(--w500);
+      border: 1px solid var(--w100); padding: 3px 10px;
+      border-radius: 20px; margin-top: 6px;
+    }
+
+    .divider { height: 1px; background: var(--s100); margin: 20px 0; }
+
+    .feat-label { font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--s300); margin-bottom: 14px; }
+
+    .feats { list-style: none; flex: 1; margin-bottom: 28px; }
+    .feat  { display: flex; align-items: flex-start; gap: 10px; padding: 5px 0; font-size: 13px; color: var(--s700); line-height: 1.45; }
+
+    .chk {
+      width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .chk-a { background: var(--w50);  border: 1px solid var(--w200); }
+    .chk-b { background: linear-gradient(135deg, var(--w600), var(--gold)); }
+    .chk-c { background: var(--w900); }
+    .feat strong { font-weight: 600; color: var(--s900); }
+
+    /* buttons */
+    .btn {
+      display: block; width: 100%; padding: 14px;
+      border-radius: 12px; font-size: 14px; font-weight: 700;
+      text-align: center; cursor: pointer; border: none;
+      text-decoration: none; transition: all .2s; letter-spacing: .01em;
+    }
+    .btn-a { background: var(--w50); color: var(--w700); border: 1px solid var(--w200); }
+    .btn-a:hover { background: var(--w100); }
+    .btn-b {
+      background: linear-gradient(135deg, var(--w700), var(--gold));
+      color: var(--white);
+      box-shadow: 0 4px 20px rgba(122,69,32,.35);
+    }
+    .btn-b:hover { box-shadow: 0 6px 28px rgba(122,69,32,.5); transform: translateY(-1px); }
+    .btn-c { background: var(--w950); color: var(--w200); }
+    .btn-c:hover { background: var(--w900); }
+
+    /* ── FOOTER ── */
+    .footer { text-align: center; padding: 0 24px 72px; }
+
+    .footer-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 15px; font-weight: 700;
+      color: var(--s700); margin-bottom: 20px;
+    }
+
+    .guarantees { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+    .guar-item  { display: flex; align-items: center; gap: 9px; font-size: 13px; color: var(--s500); }
+    .guar-icon  {
+      width: 30px; height: 30px;
+      background: var(--w50); border: 1px solid var(--w100);
+      border-radius: 9px; display: flex; align-items: center; justify-content: center;
+    }
+
+    /* CTA box */
+    .cta-box {
+      display: inline-flex; align-items: center; gap: 28px;
+      background: var(--white);
+      border: 1px solid var(--w100);
+      border-radius: 22px; padding: 22px 32px;
+      box-shadow: 0 4px 24px rgba(44,26,14,.08);
+    }
+    .qr-block { flex-shrink: 0; text-align: center; }
+    .qr-block img {
+      width: 120px; height: 120px;
+      border-radius: 12px; display: block;
+      border: 3px solid var(--w100);
+      image-rendering: crisp-edges;
+    }
+    .qr-label { font-size: 9.5px; color: var(--s300); margin-top: 6px; letter-spacing: .08em; text-transform: uppercase; }
+
+    .cta-sep { width: 1px; height: 90px; background: linear-gradient(180deg, transparent, var(--w100), transparent); }
+
+    .cta-info { text-align: left; }
+    .cta-info strong { display: block; font-family:'Playfair Display',serif; font-size: 18px; font-weight: 700; color: var(--s900); margin-bottom: 4px; }
+    .cta-info span   { display: block; font-size: 13px; color: var(--s500); margin-bottom: 16px; line-height: 1.5; }
+    .cta-phone {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: linear-gradient(135deg, var(--w700), var(--gold));
+      color: var(--white); font-size: 14px; font-weight: 700;
+      padding: 12px 22px; border-radius: 12px; text-decoration: none;
+      box-shadow: 0 4px 16px rgba(122,69,32,.35); transition: all .2s;
+    }
+    .cta-phone:hover { box-shadow: 0 6px 24px rgba(122,69,32,.5); transform: translateY(-1px); }
+
+    /* divider footer */
+    .footer-orn {
+      display: flex; align-items: center; justify-content: center;
+      gap: 16px; margin: 0 auto 32px; max-width: 400px;
+    }
+    .forn-line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--w200)); }
+    .forn-line.r { background: linear-gradient(90deg, var(--w200), transparent); }
+
+    @media (max-width: 860px) {
+      .plans { grid-template-columns: 1fr; max-width: 420px; margin-top: -50px; }
+      .card.featured { order: -1; }
+      .cta-box { flex-direction: column; gap: 20px; }
+      .cta-sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wood-line"></div>
+
+  <div class="logos-row">
+    <img src="Diseño sin título.png" class="logo-brand" alt="HSWare" />
+    <div class="logo-sep"></div>
+    <!-- Icono residencial SVG -->
+    <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="42" height="42" rx="12" fill="rgba(201,164,90,0.15)"/>
+      <path d="M8 20L21 9L34 20V34H27V26H15V34H8V20Z" stroke="#e8c97a" stroke-width="1.8" stroke-linejoin="round" fill="none"/>
+      <rect x="18" y="27" width="6" height="7" rx="1" stroke="#e8c97a" stroke-width="1.5" fill="none"/>
+      <rect x="12" y="21" width="4" height="4" rx="0.5" stroke="#c9a45a" stroke-width="1.3" fill="none"/>
+      <rect x="26" y="21" width="4" height="4" rx="0.5" stroke="#c9a45a" stroke-width="1.3" fill="none"/>
+    </svg>
+  </div>
+
+  <div class="hero-eyebrow">Software de Gestión</div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Residenciales · Hospedajes · Edificios en Alquiler
+  </div>
+
+  <h1>Administra tu residencial<br>con <em>orden y control total</em></h1>
+
+  <p class="hero-sub">
+    Registro de inquilinos, cobros mensuales por cuarto, control de morosidad<br>
+    y reportes — todo desde un solo sistema, sin papeles ni errores.
+  </p>
+
+  <div class="ornament">
+    <div class="orn-line"></div>
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <rect x="6" y="0" width="4" height="4" rx="1" fill="rgba(201,164,90,.6)"/>
+      <rect x="6" y="12" width="4" height="4" rx="1" fill="rgba(201,164,90,.6)"/>
+      <rect x="0" y="6" width="4" height="4" rx="1" fill="rgba(201,164,90,.6)"/>
+      <rect x="12" y="6" width="4" height="4" rx="1" fill="rgba(201,164,90,.6)"/>
+      <rect x="6" y="6" width="4" height="4" rx="1" fill="rgba(201,164,90,.9)"/>
+    </svg>
+    <div class="orn-line r"></div>
+  </div>
+
+  <p class="hero-note" style="margin-top:14px;">Elige el plan que se adapta a tu residencial</p>
+</section>
+
+<!-- PLANES -->
+<div class="plans">
+
+  <!-- ON-PREMISE -->
+  <div class="card">
+    <div class="card-accent accent-a"></div>
+    <div class="plan-icon icon-a">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+      </svg>
+    </div>
+    <div class="plan-label label-a">On-Premise</div>
+    <div class="plan-title">Instalación Propia</div>
+    <div class="plan-desc">El sistema se instala en tu computadora local. <strong style="color:#7a4520">Sin internet, sin nube</strong> — funciona solo desde el equipo donde está instalado. Tus datos, bajo tu llave.</div>
+
+    <div class="price-block">
+      <div class="modality">Pago único</div>
+      <div class="price-row">
+        <span class="cur">Bs.</span>
+        <span class="amt">4.000</span>
+      </div>
+      <div class="price-note">+ Bs. 150/mes soporte opcional</div>
+      <span class="price-tag">Sin mensualidad obligatoria</span>
+    </div>
+
+    <div class="divider"></div>
+    <div class="feat-label">Incluye</div>
+
+    <ul class="feats">
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Gestión de plantas y cuartos</strong> — estructura completa del edificio</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Registro de inquilinos</strong> con contrato y fechas</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Cobros mensuales</strong> con registro de pagos</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Control de morosidad</strong> — quién debe y cuánto</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Recibo imprimible</strong> por cada pago registrado</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#a05c2e" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>1 residencial</strong> — capacitación presencial incluida</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-a">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#c0392b" stroke-width="2.5" stroke-linecap="round"><line x1="2" y1="2" x2="10" y2="10"/><line x1="10" y1="2" x2="2" y2="10"/></svg>
+        </span>
+        <span style="color:#a05c2e"><strong>Sin acceso remoto</strong> — solo funciona en el equipo instalado</span>
+      </li>
+    </ul>
+
+    <a href="https://wa.me/59170488597" class="btn btn-a">Consultar disponibilidad</a>
+  </div>
+
+  <!-- SAAS MENSUAL -->
+  <div class="card featured">
+    <div class="card-accent accent-b"></div>
+    <div class="featured-tag">Más elegido</div>
+    <div class="plan-icon icon-b">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </div>
+    <div class="plan-label label-b">SaaS Mensual</div>
+    <div class="plan-title">En la Nube</div>
+    <div class="plan-desc">Accede desde cualquier celular o computadora. Sin instalaciones. Actualizaciones automáticas incluidas.</div>
+
+    <div class="price-block">
+      <div class="modality">Suscripción mensual</div>
+      <div class="price-row">
+        <span class="cur">Bs.</span>
+        <span class="amt gold">200</span>
+        <span class="mo">/mes</span>
+      </div>
+      <div class="price-note">Sin contrato de permanencia</div>
+      <span class="price-tag" style="background:#fef9f0;color:#7a4520;border-color:#e8c99a;">15 días de prueba gratis</span>
+    </div>
+
+    <div class="divider"></div>
+    <div class="feat-label">Todo lo anterior, más</div>
+
+    <ul class="feats">
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Acceso desde celular, tablet y PC</strong> en tiempo real</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Alertas automáticas</strong> de cobros por vencer y vencidos</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Reportes mensuales</strong> de ingresos y ocupación</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Backup automático</strong> — tus datos siempre seguros</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Actualizaciones</strong> automáticas sin costo adicional</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-b">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Soporte incluido</strong> en horario comercial</span>
+      </li>
+    </ul>
+
+    <a href="https://wa.me/59170488597" class="btn btn-b">Empezar prueba gratuita</a>
+  </div>
+
+  <!-- SAAS ANUAL -->
+  <div class="card">
+    <div class="card-accent accent-c"></div>
+    <div class="plan-icon icon-c">
+      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#d4a96a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        <line x1="8" y1="14" x2="8" y2="14" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="12" y1="14" x2="12" y2="14" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="16" y1="14" x2="16" y2="14" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="plan-label label-c">SaaS Anual</div>
+    <div class="plan-title">Ahorro Garantizado</div>
+    <div class="plan-desc">En la nube con pago anual. <strong style="color:#a05c2e">Accedé desde tu celular, tablet o PC</strong> en cualquier momento y lugar — bloqueás el precio por 12 meses completos.</div>
+
+    <div class="price-block">
+      <div class="modality">Pago anual único</div>
+      <div class="price-row">
+        <span class="cur">Bs.</span>
+        <span class="amt">2.000</span>
+        <span class="mo">/año</span>
+      </div>
+      <div class="price-note">Equivale a Bs. 166/mes</div>
+      <span class="price-tag" style="background:#2c1a0e;color:#d4a96a;border-color:#3d2010;">Acceso web incluido — desde donde estés</span>
+    </div>
+
+    <div class="divider"></div>
+    <div class="feat-label">Todo el plan mensual, más</div>
+
+    <ul class="feats">
+      <li class="feat">
+        <span class="chk chk-c">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#d4a96a" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Acceso web completo</strong> — celular, tablet y PC desde cualquier lugar</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-c">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#d4a96a" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Módulo de gastos</strong> — agua, luz y mantenimiento del edificio</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-c">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#d4a96a" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Rentabilidad por cuarto</strong> — ingresos vs. gastos reales</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-c">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#d4a96a" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Reporte anual PDF</strong> para declaraciones o contabilidad</span>
+      </li>
+      <li class="feat">
+        <span class="chk chk-c">
+          <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="#d4a96a" stroke-width="2.5" stroke-linecap="round"><polyline points="2 6 5 9 10 3"/></svg>
+        </span>
+        <span><strong>Soporte prioritario</strong> — respuesta en menos de 24h</span>
+      </li>
+    </ul>
+
+    <a href="https://wa.me/59170488597" class="btn btn-c">Hablar con un asesor</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+
+  <div class="footer-orn">
+    <div class="forn-line"></div>
+    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+      <rect x="4" y="0" width="4" height="4" rx="1" fill="#d4a96a"/>
+      <rect x="4" y="8" width="4" height="4" rx="1" fill="#d4a96a"/>
+      <rect x="0" y="4" width="4" height="4" rx="1" fill="#d4a96a"/>
+      <rect x="8" y="4" width="4" height="4" rx="1" fill="#d4a96a"/>
+    </svg>
+    <div class="forn-line r"></div>
+  </div>
+
+  <p class="footer-title">Todos los planes incluyen</p>
+
+  <div class="guarantees">
+    <div class="guar-item">
+      <div class="guar-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+      </div>
+      <span>Datos seguros</span>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+      </div>
+      <span>Sin papel ni planillas</span>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <span>Capacitación incluida</span>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+        </svg>
+      </div>
+      <span>Registro sin límite de cuartos</span>
+    </div>
+    <div class="guar-item">
+      <div class="guar-icon">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#a05c2e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+        </svg>
+      </div>
+      <span>Recibos imprimibles</span>
+    </div>
+  </div>
+
+  <!-- CTA + QR -->
+  <div class="cta-box">
+    <div class="qr-block">
+      <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAAA5ZDbSAAAAAklEQVR4AewaftIAAAVsSURBVO3BsW0lOwxA0Wth6mDECth/DayAEStw5MDJ/kiAEo21s+99GATP+fj++vxDK2vQShu00gattEErbdBKG7TSBq20ix+YCu/mkaxMhVMeyY6pcMojWZkKk0eyYyqsPJKVqfBuHsnOoJU2aKVd/AWP5FVMhR2P5AlT4Y5HcsojmUyFV/BIXsVUODFopQ1aaYNW2sU/MBVOeSRPmAqnPJKVqXDKVFh5JDseyWQqPGUqnPJInhi00gattEEr7eIXMhUmj2RlKpzySN7BVJg8kt9s0EobtNIufiGPZDIVVh7Jjqmw8kieMhVOmAorj+Q3GbTSBq20QSvt4h94JO/mkaxMhZVHsmMqrDySyVS445FMpsI7eCTvNmilDVppg1baxV8wFf4PpsLkkTzlkaxMhckjWZkKpzySyVQ4ZSr83wattEEr7eP76/MPRZkKOx7JU6bC5JH8ZoNW2qCVNmilfXx/ff7hIVNh5ZFMpsIpj2RlKkweycpUOOWRrEyFUx7JCVPhjkdyylSYPJI7psLkkewMWmmDVtrFm3gkr2Aq3PFITnkkk6lwx1SYPJKVqbDjkaxMhR2PZOWRTKbCyiN5YtBKG7TSBq20ix+YCqdMhVfwSCZTYeWRrEyFySN5FY9kMhWe8kh2TIUdj2RlKjwxaKUNWmmDVtrFDzySyVR4FY/khEeyMhVOmQqnPJJTHslkKqxMhVMeycpUOOWRnBi00gattI/vr88/3DAVTnkkO6bCKY9kMhVexSPZMRVewSNZmQo7HsnKVNjxSJ4YtNIGrbRBK+3iBx7JZCq8ikcymQpPeSSTqXDHVJg8kqc8kslUWJkKT3kkO6bCjkeyM2ilDVppg1baxV/wSF7FVNgxFV7BI9kxFe54JJOpsOORrEyFVzAVVh7JylQ4MWilDVppFy9kKux4JDumwo5H8pSpsPJIdjySlakweSQ7psLKI1mZCk94JHc8khODVtqglTZopV38wFQ45ZFMpsIdU2HySHZMhTseyTt4JJOpsPJIdkyFp0yFySNZmQo7HsnOoJU2aKUNWmkXP/BIJlNh5ZE85ZHsmAqTR3LHVJg8kpWpsDIVJo/kjqmwYypMHskpU2FlKrzboJU2aKVd/MBUmDySlamw8kgmj2RlKryDR7LjkeyYCiuPZOWRTKbCyiOZTIU7HsmOR7JjKrzCoJU2aKUNWmkf31+ffzhkKqw8kpWpsOOR7JgKK49kMhVOeSQrU2HlkZwyFU54JHdMhckjWZkKOx7JylTY8Uh2Bq20QSvt4gemwuSRrEyFlUdyylQ44ZGsTIUdU2HlkaxMhckjWZkKpzySyVQ4ZSrc8UhOeSQnBq20QStt0Er7+P76/MMvYyrseCQ7psIdj+SUqbDjkUymwsojOWUqrDySHVNhxyPZGbTSBq20QSvt4gemwrt5JCuPZMdUWHkk7+aRrEyFU6bC5JGcMhVeYdBKG7TSLv6CR/IqpsKOqTB5JCuPZMcjOWUqrDySHVNh5ZFMpsIdj+QJj+QVBq20QStt0Eq7+AemwimP5N1MhTseyeSRnPJITpkKT5kKk0eyMhVWHsmJQStt0EobtNIufiGPZDIVVh7JylR4wlRYeSTv4JHsmAorj2QyFV5h0EobtNIufiFTYfJInvJIVqbC5JGsTIWVRzKZCjseySlT4ZRHcsdUmDySnUErbdBKG7TSLv6BR/IOHsmOqbDjkaxMhR1T4RVMhZVHsjIVdjySU6bCyiM5MWilDVppg1baxV8wFf5vpsLKI1mZCpOpcMcjOWUq7Hgkk6lwyiNZmQorj2QyFe6YCpNHsjNopQ1aaR/fX59/aGUNWmmDVtqglTZopQ1aaYNW2n/swzb1S4HUHwAAAABJRU5ErkJggg=="
+           alt="QR WhatsApp" />
+      <div class="qr-label">Escanear para contactar</div>
+    </div>
+
+    <div class="cta-sep"></div>
+
+    <div class="cta-info">
+      <strong>¿Querés una demo para tu residencial?</strong>
+      <span>Te mostramos el sistema funcionando<br>con la estructura de tu edificio real.</span>
+      <a href="https://wa.me/59170488597" class="cta-phone">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.136.561 4.14 1.535 5.876L.057 23.882a.75.75 0 0 0 .906.974l6.218-1.634A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.7-.502-5.26-1.378l-.376-.215-3.892 1.023 1.001-3.793-.233-.389A10 10 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+        </svg>
+        +591 70488597
+      </a>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

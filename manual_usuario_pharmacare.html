@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manual de Usuario · PharmaCare</title>
+<style>
+  :root{
+    --accent:#0e8a44;
+    --accent-dark:#073b22;
+    --accent-light:#eaf6ee;
+    --text:#1e293b;
+    --text-soft:#5b6472;
+    --bg:#ffffff;
+    --bg-soft:#f7f8fa;
+    --border:#e3e6ea;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Segoe UI',Arial,Helvetica,sans-serif;
+    color:var(--text);
+    background:var(--bg-soft);
+    line-height:1.6;
+  }
+  .icon{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+  .icon-lg{width:26px;height:26px}
+
+  /* ---------- LAYOUT ---------- */
+  .app{display:flex;min-height:100vh}
+
+  /* Sidebar TOC */
+  .toc{
+    width:290px;flex-shrink:0;background:var(--bg);border-right:1px solid var(--border);
+    padding:28px 20px;position:sticky;top:0;height:100vh;overflow-y:auto;
+  }
+  .toc-brand{display:flex;align-items:center;gap:12px;margin-bottom:26px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+  .toc-brand img{height:38px}
+  .toc-brand div p{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--text-soft);text-transform:uppercase}
+  .toc-brand div span{display:block;font-size:16px;font-weight:800;color:var(--accent-dark)}
+
+  .toc nav a{
+    display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;
+    font-size:14px;font-weight:600;color:var(--text-soft);text-decoration:none;margin-bottom:2px;
+  }
+  .toc nav a:hover{background:var(--accent-light);color:var(--accent-dark)}
+  .toc nav .grp-title{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#9aa3ad;margin:18px 0 6px 12px}
+  .toc nav .grp-title:first-child{margin-top:0}
+
+  /* Content */
+  .content{flex:1;max-width:900px;padding:40px 56px 100px}
+
+  .cover{
+    background:linear-gradient(135deg,var(--accent-dark),var(--accent));
+    border-radius:16px;color:#fff;padding:52px 48px;margin-bottom:44px;
+  }
+  .cover .kicker{font-size:13px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#bfe8cf;margin-bottom:14px}
+  .cover h1{font-size:38px;font-weight:900;line-height:1.15;margin-bottom:14px}
+  .cover p{font-size:16px;color:#dcf3e3;max-width:560px}
+  .cover .meta{margin-top:26px;display:flex;gap:22px;flex-wrap:wrap;font-size:13px;color:#cdeed9}
+  .cover .meta b{color:#fff}
+
+  section{margin-bottom:52px;scroll-margin-top:24px}
+  section h2{
+    font-size:24px;font-weight:800;color:var(--accent-dark);display:flex;align-items:center;gap:12px;
+    padding-bottom:14px;border-bottom:2px solid var(--border);margin-bottom:20px;
+  }
+  section h2 .icon-wrap{
+    width:40px;height:40px;background:var(--accent-light);border-radius:10px;
+    display:flex;align-items:center;justify-content:center;color:var(--accent-dark);flex-shrink:0;
+  }
+  h3{font-size:17px;font-weight:800;color:var(--text);margin:22px 0 10px}
+  p{font-size:15px;color:var(--text-soft);margin-bottom:10px}
+  strong{color:var(--text)}
+
+  ol.steps{list-style:none;counter-reset:step;margin:14px 0}
+  ol.steps li{
+    counter-increment:step;position:relative;padding:10px 0 10px 40px;font-size:15px;color:var(--text-soft);
+    border-bottom:1px dashed var(--border);
+  }
+  ol.steps li:last-child{border-bottom:none}
+  ol.steps li::before{
+    content:counter(step);position:absolute;left:0;top:8px;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;
+  }
+  ol.steps li b{color:var(--text)}
+
+  ul.plain{margin:10px 0 10px 4px}
+  ul.plain li{list-style:none;padding-left:22px;position:relative;font-size:15px;color:var(--text-soft);margin-bottom:6px}
+  ul.plain li::before{content:"–";position:absolute;left:0;color:var(--accent)}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px}
+  th,td{text-align:left;padding:11px 14px;border:1px solid var(--border)}
+  th{background:var(--bg-soft);font-weight:800;color:var(--text)}
+  td{color:var(--text-soft)}
+
+  .role-row{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 18px}
+  .role-badge{
+    font-size:12px;font-weight:800;padding:5px 12px;border-radius:20px;border:1.5px solid var(--border);color:var(--text-soft);
+  }
+  .role-badge.on{border-color:var(--accent);color:var(--accent-dark);background:var(--accent-light)}
+
+  .note{
+    display:flex;gap:12px;background:var(--bg-soft);border:1px solid var(--border);border-left:4px solid var(--accent);
+    border-radius:10px;padding:14px 16px;font-size:14px;color:var(--text-soft);margin:14px 0;
+  }
+  .note.warn{border-left-color:#a16207;background:#fdfaf1}
+  .note svg{color:var(--accent);flex-shrink:0;margin-top:1px}
+  .note.warn svg{color:#a16207}
+
+  .field-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px 20px;margin:12px 0}
+  .field-grid .f{font-size:14px;color:var(--text-soft);padding:6px 0;border-bottom:1px dotted var(--border)}
+  .field-grid .f b{color:var(--text);display:inline-block;min-width:150px}
+
+  .print-btn{
+    position:fixed;top:22px;right:26px;background:var(--accent);color:#fff;border:none;border-radius:30px;
+    padding:12px 22px;font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px;cursor:pointer;
+    box-shadow:0 6px 18px rgba(7,59,34,.28);z-index:50;
+  }
+  .print-btn:hover{background:var(--accent-dark)}
+
+  footer{border-top:1px solid var(--border);padding-top:24px;text-align:center;font-size:13px;color:#9aa3ad}
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    body{background:#fff}
+    .toc,.print-btn{display:none !important}
+    .app{display:block}
+    .content{max-width:100%;padding:0 10px}
+    .cover{background:#fff !important;color:#000;border:2px solid var(--accent-dark);padding:28px}
+    .cover .kicker{color:var(--accent-dark)}
+    .cover p,.cover .meta{color:#333}
+    .cover .meta b{color:#000}
+    section{page-break-inside:avoid;margin-bottom:30px}
+    section h2{color:#000}
+    a{text-decoration:none;color:inherit}
+  }
+</style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()" title="Imprimir o guardar como PDF">
+  <svg class="icon" viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir manual
+</button>
+
+<div class="app">
+
+  <!-- ===================== TOC ===================== -->
+  <aside class="toc">
+    <div class="toc-brand">
+      <img src="client/public/logo.png" alt="PharmaCare">
+      <div><p>Manual de</p><span>Usuario</span></div>
+    </div>
+    <nav>
+      <div class="grp-title">Empezando</div>
+      <a href="#intro">Introducción</a>
+      <a href="#roles">Roles y accesos</a>
+      <a href="#login">Iniciar sesión</a>
+
+      <div class="grp-title">Módulos</div>
+      <a href="#dashboard">Panel principal</a>
+      <a href="#productos">Productos e inventario</a>
+      <a href="#ventas">Historial de ventas</a>
+      <a href="#nueva-venta">Nueva venta (POS)</a>
+      <a href="#proveedores">Proveedores</a>
+      <a href="#usuarios">Usuarios del sistema</a>
+      <a href="#reportes">Reportes</a>
+      <a href="#consultas">Consultas (próximamente)</a>
+
+      <div class="grp-title">Ayuda</div>
+      <a href="#cierre">Cerrar sesión</a>
+      <a href="#consejos">Consejos y buenas prácticas</a>
+      <a href="#faq">Preguntas frecuentes</a>
+      <a href="#soporte">Soporte</a>
+    </nav>
+  </aside>
+
+  <!-- ===================== CONTENT ===================== -->
+  <main class="content">
+
+    <div class="cover">
+      <div class="kicker">Manual de usuario</div>
+      <h1>Cómo usar PharmaCare</h1>
+      <p>Guía completa para administradores, farmacéuticos y cajeros: aprende a manejar cada módulo del sistema paso a paso.</p>
+      <div class="meta">
+        <span>Versión del manual: <b>1.0</b></span>
+        <span>Sistema: <b>PharmaCare</b></span>
+        <span>Desarrollado por: <b>HSWare Software</b></span>
+      </div>
+    </div>
+
+    <!-- INTRO -->
+    <section id="intro">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>Introducción</h2>
+      <p>PharmaCare es el sistema de gestión para farmacias que centraliza el control de <strong>inventario, ventas, proveedores, usuarios y reportes</strong> en un solo lugar. Este manual explica, paso a paso, cómo usar cada pantalla del sistema según el rol que tenga tu usuario.</p>
+      <p>Recomendamos leer primero la sección <strong>Roles y accesos</strong> para saber exactamente qué módulos vas a ver al iniciar sesión, ya que el menú se adapta automáticamente según tu perfil.</p>
+    </section>
+
+    <!-- ROLES -->
+    <section id="roles">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>Roles y accesos</h2>
+      <p>El sistema tiene 4 tipos de usuario. El menú lateral de la izquierda muestra únicamente los módulos permitidos para el rol con el que iniciaste sesión.</p>
+      <table>
+        <thead><tr><th>Rol</th><th>Descripción</th><th>Módulos visibles</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>Administrador</b></td>
+            <td>Control total del sistema, incluida la gestión de usuarios.</td>
+            <td>Dashboard, Productos, Ventas, Nueva Venta, Proveedores, Usuarios, Reportes</td>
+          </tr>
+          <tr>
+            <td><b>Farmacéutico</b></td>
+            <td>Operación diaria completa, sin gestión de usuarios.</td>
+            <td>Dashboard, Productos, Ventas, Nueva Venta, Proveedores, Reportes</td>
+          </tr>
+          <tr>
+            <td><b>Cajero</b></td>
+            <td>Enfocado exclusivamente en el punto de venta.</td>
+            <td>Dashboard, Productos, Ventas, Nueva Venta</td>
+          </tr>
+          <tr>
+            <td><b>Comercial</b></td>
+            <td>Rol de demostración: solo puede consultar el manual interactivo del sistema (dentro de la app, menú <em>Manual</em>), sin acceso a datos reales.</td>
+            <td>Manual interactivo</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Si intentas entrar a una pantalla que tu rol no tiene permitida, el sistema te redirige automáticamente al Dashboard (o al Manual, en el caso del rol Comercial).</span>
+      </div>
+    </section>
+
+    <!-- LOGIN -->
+    <section id="login">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg></span>Iniciar sesión</h2>
+      <div class="role-row"><span class="role-badge on">Todos los roles</span></div>
+      <ol class="steps">
+        <li>Abre PharmaCare en el navegador. Verás la pantalla de <b>inicio de sesión</b>.</li>
+        <li>Ingresa tu <b>correo electrónico</b> y <b>contraseña</b> asignados por el administrador.</li>
+        <li>Presiona <b>Iniciar sesión</b>. Si los datos son correctos, entrarás directamente al Dashboard (o al Manual, si tu rol es Comercial).</li>
+      </ol>
+      <div class="note warn">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Si olvidaste tu contraseña, solicita a un <b>Administrador</b> que la restablezca desde el módulo de Usuarios.</span>
+      </div>
+    </section>
+
+    <!-- DASHBOARD -->
+    <section id="dashboard">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>Panel principal (Dashboard)</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge on">Cajero</span>
+      </div>
+      <p>Es la primera pantalla que ves al iniciar sesión. Muestra un resumen general del estado de la farmacia y accesos directos a las tareas más frecuentes.</p>
+      <ol class="steps">
+        <li>Revisa las tarjetas de resumen en la parte superior para ver el estado general del negocio.</li>
+        <li>Usa la sección <b>Accesos Rápidos</b> para saltar directo a Nueva Venta, Productos u otros módulos.</li>
+        <li>Presiona el botón de <b>actualizar</b> (ícono circular) si necesitas refrescar los datos sin recargar la página.</li>
+      </ol>
+    </section>
+
+    <!-- PRODUCTOS -->
+    <section id="productos">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/></svg></span>Productos e inventario</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge on">Cajero</span>
+      </div>
+      <p>Aquí se administra el catálogo completo de medicamentos y productos de la farmacia, junto con su stock disponible.</p>
+
+      <h3>Buscar un producto</h3>
+      <ol class="steps">
+        <li>Escribe en el campo <b>«Buscar por nombre, código de barras...»</b> y los resultados se filtran automáticamente.</li>
+        <li>Presiona <b>Buscar</b> si necesitas forzar la búsqueda.</li>
+      </ol>
+
+      <h3>Registrar un nuevo producto</h3>
+      <ol class="steps">
+        <li>Presiona el botón <b>Nuevo Producto</b> en la parte superior derecha.</li>
+        <li>Completa el formulario con los siguientes datos:</li>
+      </ol>
+      <div class="field-grid">
+        <div class="f"><b>Nombre *</b>Nombre comercial del producto</div>
+        <div class="f"><b>Código de barras</b>Código para escaneo rápido</div>
+        <div class="f"><b>Categoría *</b>Tipo de producto</div>
+        <div class="f"><b>Proveedor</b>Proveedor asociado</div>
+        <div class="f"><b>Precio *</b>Precio de venta al público</div>
+        <div class="f"><b>Costo *</b>Costo de adquisición</div>
+        <div class="f"><b>Stock *</b>Cantidad disponible actual</div>
+        <div class="f"><b>Stock mínimo *</b>Nivel para alerta de reposición</div>
+        <div class="f"><b>Fecha de expiración</b>Vencimiento del lote</div>
+        <div class="f"><b>Descripción</b>Notas adicionales del producto</div>
+      </div>
+      <ol class="steps">
+        <li>Presiona <b>Guardar</b> para crear el producto, o <b>Cancelar</b> para descartar los cambios.</li>
+      </ol>
+
+      <h3>Editar o eliminar un producto</h3>
+      <ol class="steps">
+        <li>Ubica el producto en la tabla y presiona el ícono de <b>lápiz (Editar)</b> para modificar sus datos.</li>
+        <li>Presiona el ícono de <b>papelera (Eliminar)</b> para darlo de baja. Esta acción no se puede deshacer.</li>
+      </ol>
+      <div class="note">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Define siempre el <b>Stock mínimo</b>: es la base para futuras alertas de reposición y evita quiebres de inventario.</span>
+      </div>
+    </section>
+
+    <!-- VENTAS -->
+    <section id="ventas">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>Historial de ventas</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge on">Cajero</span>
+      </div>
+      <p>Consulta todas las ventas registradas en el sistema, con filtros por fecha.</p>
+      <ol class="steps">
+        <li>Usa los campos <b>Fecha inicio</b> y <b>Fecha fin</b> para acotar el periodo que quieres revisar.</li>
+        <li>Presiona <b>Filtrar/Actualizar</b> (ícono circular) para aplicar los cambios.</li>
+        <li>Presiona <b>Nueva Venta</b> en la parte superior para ir directo al punto de venta.</li>
+      </ol>
+    </section>
+
+    <!-- NUEVA VENTA -->
+    <section id="nueva-venta">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></span>Nueva venta (Punto de venta)</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge on">Cajero</span>
+      </div>
+      <p>Es la pantalla para registrar una venta en el momento, pensada para uso rápido en caja.</p>
+      <ol class="steps">
+        <li>Escribe en el buscador <b>«Nombre o código de barras...»</b> para localizar el producto.</li>
+        <li>Presiona sobre el producto (o el botón <b>+</b>) para agregarlo al carrito.</li>
+        <li>En el carrito, ajusta cantidades o quita productos con el ícono correspondiente.</li>
+        <li>Completa, si aplica, los datos del cliente: <b>nombre</b> y <b>número de teléfono</b>.</li>
+        <li>Verifica el total calculado automáticamente en la parte inferior.</li>
+        <li>Presiona <b>Finalizar Venta</b> para confirmar y generar el comprobante.</li>
+      </ol>
+      <div class="note">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Revisa siempre el carrito antes de finalizar: una vez confirmada, la venta descuenta el stock automáticamente.</span>
+      </div>
+    </section>
+
+    <!-- PROVEEDORES -->
+    <section id="proveedores">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span>Proveedores</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge">Cajero</span>
+      </div>
+      <p>Administra el directorio de proveedores que abastecen a la farmacia.</p>
+      <ol class="steps">
+        <li>Presiona <b>Nuevo Proveedor</b> para registrar uno nuevo.</li>
+        <li>Completa el formulario:</li>
+      </ol>
+      <div class="field-grid">
+        <div class="f"><b>Nombre</b>Nombre del proveedor</div>
+        <div class="f"><b>Persona de contacto</b>Contacto directo</div>
+        <div class="f"><b>Correo</b>Correo de contacto</div>
+        <div class="f"><b>Teléfono</b>Número de contacto</div>
+        <div class="f"><b>RFC</b>Identificación fiscal</div>
+        <div class="f"><b>Dirección</b>Calle, ciudad, estado, C.P. y país</div>
+        <div class="f"><b>Notas</b>Información adicional</div>
+      </div>
+      <ol class="steps">
+        <li>Presiona <b>Guardar</b>. Para modificar un proveedor existente usa el ícono de <b>lápiz</b>; para eliminarlo, el ícono de <b>papelera</b>.</li>
+      </ol>
+    </section>
+
+    <!-- USUARIOS -->
+    <section id="usuarios">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>Usuarios del sistema</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge">Farmacéutico</span><span class="role-badge">Cajero</span>
+      </div>
+      <p>Módulo exclusivo del <b>Administrador</b> para crear y gestionar las cuentas de acceso al sistema.</p>
+      <ol class="steps">
+        <li>Presiona <b>Nuevo Usuario</b>.</li>
+        <li>Completa <b>nombre completo</b>, <b>correo electrónico</b>, <b>contraseña</b>, <b>teléfono</b> y selecciona el <b>rol</b> (Administrador, Farmacéutico o Cajero).</li>
+        <li>Presiona <b>Guardar</b> para crear la cuenta.</li>
+        <li>Usa el ícono de <b>lápiz</b> para editar los datos o el rol de un usuario existente, y el de <b>papelera</b> para eliminarlo.</li>
+      </ol>
+      <div class="note warn">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Asigna el rol correcto a cada usuario: define qué módulos podrá ver en el menú lateral.</span>
+      </div>
+    </section>
+
+    <!-- REPORTES -->
+    <section id="reportes">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><path d="M2 20h20"/></svg></span>Reportes</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge">Cajero</span>
+      </div>
+      <p>Panel con información analítica del negocio, dividido en tres bloques:</p>
+      <ul class="plain">
+        <li><b>Resumen de inventario</b>: estado general del stock disponible.</li>
+        <li><b>Productos por categoría</b>: distribución del catálogo.</li>
+        <li><b>Top 10 productos más vendidos</b>: ranking de productos con mayor rotación.</li>
+      </ul>
+      <ol class="steps">
+        <li>Presiona el botón de <b>actualizar</b> para refrescar la información con los datos más recientes.</li>
+      </ol>
+    </section>
+
+    <!-- CONSULTAS -->
+    <section id="consultas">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg></span>Consultas</h2>
+      <div class="role-row">
+        <span class="role-badge on">Administrador</span><span class="role-badge on">Farmacéutico</span><span class="role-badge">Cajero</span>
+      </div>
+      <div class="note warn">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Este acceso ya aparece en el menú lateral, pero la pantalla de <b>Consultas farmacéuticas</b> se encuentra en desarrollo. Estará disponible en una próxima actualización del sistema.</span>
+      </div>
+    </section>
+
+    <!-- CIERRE -->
+    <section id="cierre">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span>Cerrar sesión</h2>
+      <div class="role-row"><span class="role-badge on">Todos los roles</span></div>
+      <ol class="steps">
+        <li>En la parte inferior del menú lateral, presiona <b>Cerrar Sesión</b>.</li>
+        <li>El sistema te regresará automáticamente a la pantalla de inicio de sesión.</li>
+      </ol>
+    </section>
+
+    <!-- CONSEJOS -->
+    <section id="consejos">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.6 10.8c.5.4.8 1 .8 1.7v.5h5.6v-.5c0-.7.3-1.3.8-1.7A6 6 0 0 0 12 3z"/></svg></span>Consejos y buenas prácticas</h2>
+      <ul class="plain">
+        <li>Registra el <b>stock mínimo</b> de cada producto para evitar quiebres de inventario.</li>
+        <li>Verifica la <b>fecha de expiración</b> al dar de alta un producto para llevar control de vencimientos.</li>
+        <li>Revisa el <b>Historial de ventas</b> con filtro de fechas al cierre de cada turno.</li>
+        <li>Solo el Administrador debe crear cuentas de usuario; asigna el rol correcto a cada persona.</li>
+        <li>Usa <b>Reportes</b> periódicamente para tomar decisiones de compra y reposición.</li>
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 2-3 4"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span>Preguntas frecuentes</h2>
+      <h3>¿Por qué no veo el módulo de Usuarios?</h3>
+      <p>Solo el rol <b>Administrador</b> tiene acceso a la gestión de usuarios. Si necesitas crear o editar cuentas, solicítalo a un administrador.</p>
+      <h3>¿Qué pasa si me equivoco al registrar una venta?</h3>
+      <p>Contacta a un Administrador o Farmacéutico para revisar el caso; actualmente las ventas confirmadas no se editan desde la pantalla de historial.</p>
+      <h3>¿Por qué el rol Comercial solo ve el manual?</h3>
+      <p>Es un acceso de demostración pensado para mostrar el funcionamiento del sistema sin exponer datos reales de la farmacia.</p>
+    </section>
+
+    <!-- SOPORTE -->
+    <section id="soporte">
+      <h2><span class="icon-wrap"><svg class="icon" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.083.532 4.04 1.464 5.747L.036 23.272a.75.75 0 0 0 .916.916l5.525-1.428A11.954 11.954 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg></span>Soporte</h2>
+      <p>Si tienes dudas adicionales o encuentras algún problema con el sistema, comunícate con el equipo de soporte de <b>HSWare Software</b>.</p>
+      <div class="field-grid">
+        <div class="f"><b>WhatsApp</b>704 885 97</div>
+        <div class="f"><b>Cobertura</b>Bolivia, atención a nivel nacional</div>
+      </div>
+    </section>
+
+    <footer>
+      Manual de usuario · PharmaCare — Desarrollado por HSWare Software
+    </footer>
+
+  </main>
+</div>
+</body>
+</html>
